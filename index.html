@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<title>Dopewars</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-khaki.css">
+
+<body>
+
+	<header class="w3-bar w3-card w3-theme w3-top">
+		<!-- <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+		<h1 class="w3-bar-item">Movies</h1> -->
+		<b><table class="w3-table">
+			<tr>
+				<td>Cash: <span id="cash">$0</span></td>
+				<td>Bank: <span id="bank">$0</span></td>
+				<td>Debt: <span id="debt">$0</span></td>
+			</tr>
+			<tr>
+				<td>Bitches: <span id="bitches">0</span></td>
+				<td>Guns: <span id="guns">0</span></td>
+				<td>Space: <span id="space">0</span></td>
+			</tr>
+			<tr>
+				<td style="color: red">Health: <span id="health">0</span></td>
+				<td></td>
+				<td style="color: green">Days: <span id="days">0</span>/31</td>
+			</tr>
+		</table></b>
+		
+	</header>
+
+	<div class="w3-container w3-theme-l4" style="margin-top:90px">
+		<hr>
+
+	<ul class="w3-ul">
+		<li class="w3-bar">
+			<div class="w3-bar-item">Acid: </div><span class="w3-bar-item" id="acid">$0</span>
+				<button id='sellAcid' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button id='buyAcid'
+				 class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="acidQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">Cocaine: </div><span class="w3-bar-item" id="cocaine">$0</span><button id='sellCocaine'
+				 class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button id='buyCocaine' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="cocaineQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">Ecstasy: </div><span class="w3-bar-item" id='ecstasy'>$0</span><button id='sellEcstasy'
+				 class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button id='buyEcstasy' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="ecstasyQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">PCP: </div><span class="w3-bar-item" id="pcp">$0</span><button id='sellPcp' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button
+				 id='buyPcp' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="pcpQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">Heroin: </div><span class="w3-bar-item" id="heroin">$0</span><button id='sellHeroin' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button
+				 id='buyHeroin' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="heroinQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">Weed: </div><span class="w3-bar-item" id="weed">$0</span><button id='sellWeed' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button
+				 id='buyWeed' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="weedQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">Speed: </div><span class="w3-bar-item" id="speed">$0</span><button id='sellSpeed' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button
+				 id='buySpeed' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="speedQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+		<li class="w3-bar">
+			<div class="w3-bar-item">Shrooms: </div><span class="w3-bar-item" id="shrooms">$0</span><button id='sellShrooms'
+				 class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id03').style.display='block'">Sell</button><button id='buyShrooms' class='w3-button w3-bar-item w3-right' onclick="document.getElementById('id02').style.display='block'">Buy</button><span id="shroomsQty" class="w3-right w3-bar-item w3-theme-l2 w3-margin-right" style="width: 100px">0</span>
+		</li>
+	</ul>
+
+
+		<hr>
+	</div>
+
+	<footer class="w3-container w3-theme w3-margin-top w3-padding-large w3-bottom">
+		<!-- <h3>Footer</h3> -->
+		<div class="w3-bar">
+			<button class="w3-button w3-white w3-border" onclick="document.getElementById('id04').style.display='block'">Menu</button>
+			<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id01').style.display='block'">Travel</button>
+		</div>
+	</footer>
+<!-- Travel modal -->
+	<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+			<header class="w3-container w3-theme">
+				<span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<h2>Travel</h2>
+			</header>
+			<ul class="w3-ul w3-container">
+				<li>
+				<button class='w3-button w3-block btn-info city losAngeles'>Los Angeles</button></li>
+				<li>
+				<button class='w3-button w3-block btn-info city harlem'>Harlem</button></li>
+				<li>
+				<button class='w3-button w3-block btn-info city bronx'>Bronx</button></li>
+				<li>
+				<button class='w3-button w3-block btn-info city chicago'>Chicago</button></li>
+				<li>
+				<button class='w3-button w3-block btn-info city brooklyn'>Brooklyn</button></li>
+				<li>
+				<button class='w3-button w3-block btn-info city sanAntonio'>San Antonio</button></li>
+				<li>
+				<button class='w3-button w3-block btn-info city miami'>Miami</button></li>
+				</ul>
+			<footer class="w3-container w3-theme">
+				<p>Modal Footer</p>
+			</footer>
+		</div>
+	</div>
+
+<!-- Buy modal -->
+	<div id="id02" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+			<header class="w3-container w3-theme">
+				<span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<h2>Buy</h2>
+			</header>
+			<div class="w3-cell-row w3-padding">
+				<div class="w3-container w3-cell">
+					<p class="buy-modal">Heroin: </p>
+				</div>
+				<div class="w3-container w3-cell">
+					<p class="subtotal">$0</p>
+				</div>
+				<div class="w3-container w3-cell">
+					<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+				</div>
+			</div>
+				
+			<footer class="w3-container w3-theme w3-padding">
+				<button class="w3-button w3-white w3-border" onclick="document.getElementById('id02').style.display='none'">Max</button>
+				<button class="w3-button w3-white w3-border" onclick="document.getElementById('id02').style.display='none'">Buy</button>
+				<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id02').style.display='none'">Close</button>
+			</footer>
+		</div>
+	</div>
+
+<!-- Sell modal -->
+	<div id="id03" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+			<header class="w3-container w3-theme">
+				<span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<h2>Sell</h2>
+			</header>
+			<div class="w3-cell-row w3-padding">
+				<div class="w3-container w3-cell">
+					<p class="sell-modal">Heroin: </p>
+				</div>
+				<div class="w3-container w3-cell">
+					<p class="subtotal-sell">$0</p>
+				</div>
+				<div class="w3-container w3-cell">
+					<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+				</div>
+			</div>
+
+			<footer class="w3-container w3-theme w3-padding">
+				<button class="w3-button w3-white w3-border" onclick="document.getElementById('id03').style.display='none'">Max</button>
+				<button class="w3-button w3-white w3-border" onclick="document.getElementById('id03').style.display='none'">Buy</button>
+				<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id03').style.display='none'">Close</button>
+			</footer>
+		</div>
+	</div>
+
+	<!-- Travel modal -->
+	<div id="id04" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+			<header class="w3-container w3-theme">
+				<span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<h2>Menu</h2>
+			</header>
+			<ul class="w3-ul w3-container">
+				<li>
+					<button class='w3-button w3-block btn-info new-game'>New Game</button></li>
+				<li>
+					<button class='w3-button w3-block btn-info info'>Info</button></li>
+				<li>
+					<button class='w3-button w3-block btn-info help'>Help</button></li>
+				<li>
+					<button class='w3-button w3-block btn-info close-app'>Overdose</button></li>
+					<li>
+						<button class='w3-button w3-block btn-info close-app'>Leave</button></li>
+			
+			</ul>
+			<footer class="w3-container w3-theme">
+				<p>Modal Footer</p>
+			</footer>
+		</div>
+	</div>
+
+	<!-- Fight modal -->
+	<div id="id05" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+			<header class="w3-container w3-theme">
+				<h2>Fight</h2>
+			</header>
+			<div class="w3-cell-row w3-padding">
+				<div class="w3-container w3-cell">
+					<p class="fight-text">The police found you in a compromising situation.</p>
+				</div>
+				<div class="w3-container w3-cell">
+					<p class="health-text">Health: </p>
+				</div>
+				<div class="w3-container w3-cell">
+					<p class="health">100</p>
+				</div>
+			</div>
+	
+			<footer class="w3-container w3-theme w3-padding">
+				<button class="w3-button w3-white w3-border" onclick="document.getElementById('id05').style.display='none'">Run</button>
+				<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id05').style.display='none'">Fight</button>
+			</footer>
+		</div>
+	</div>
+
+		<!-- Message modal -->
+		<div id="id06" class="w3-modal">
+			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+				<!-- <header class="w3-container w3-theme">
+					<h2>Fight</h2>
+				</header> -->
+				<div class="w3-cell-row w3-padding">
+					<div class="w3-container w3-cell">
+						<p class="message-text">You found cocaine in a bar bathroom</p>
+					</div>
+				
+					<div class="w3-container w3-cell">
+						<p class="item">10</p>
+					</div>
+				</div>
+		
+				<footer class="w3-container w3-theme w3-padding">
+					
+					<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id07').style.display='none'">OK</button>
+				</footer>
+			</div>
+		</div>
+
+		<!-- Shark modal -->
+		<div id="id07" class="w3-modal">
+			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+				<header class="w3-container w3-theme">
+					<span onclick="document.getElementById('id07').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<h2>Shark</h2>
+				</header>
+				<div class="w3-cell-row w3-padding">
+					<div class="w3-container w3-cell">
+						<p class="sell-modal">What you whant to do? </p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p class="subtotal-sell">$0</p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+					</div>
+				</div>
+		
+				<footer class="w3-container w3-theme w3-padding">
+					<button class="w3-button w3-white w3-border" onclick="document.getElementById('id07').style.display='none'">Pay</button>
+					<button class="w3-button w3-white w3-border" onclick="document.getElementById('id07').style.display='none'">Loan</button>
+					<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id07').style.display='none'">Close</button>
+				</footer>
+			</div>
+		</div>
+
+		<!-- Bank modal -->
+		<div id="id08" class="w3-modal">
+			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+				<header class="w3-container w3-theme">
+					<span onclick="document.getElementById('id08').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<h2>Bank</h2>
+				</header>
+				<div class="w3-cell-row w3-padding">
+					<div class="w3-container w3-cell">
+						<p class="sell-modal">What you whant to do? </p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p class="subtotal-sell">$0</p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+					</div>
+				</div>
+		
+				<footer class="w3-container w3-theme w3-padding">
+					<button class="w3-button w3-white w3-border" onclick="document.getElementById('id08').style.display='none'">Save</button>
+					<button class="w3-button w3-white w3-border" onclick="document.getElementById('id08').style.display='none'">Withdraw</button>
+					<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id09').style.display='none'">Close</button>
+				</footer>
+			</div>
+		</div>
+
+		<!-- Buy stuff modal -->
+		<div id="id09" class="w3-modal">
+			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+				<header class="w3-container w3-theme">
+					<span onclick="document.getElementById('id09').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<h2>Buy stuffs</h2>
+				</header>
+				<div class="w3-cell-row w3-padding">
+					<div class="w3-container w3-cell">
+						<p class="buy-stuff-text">Buy big coat for: </p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p class="buy-stuff-price">$0</p>
+					</div>
+					
+				</div>
+		
+				<footer class="w3-container w3-theme w3-padding">
+					<button class="w3-button w3-white w3-border" onclick="document.getElementById('id09').style.display='none'">Buy</button>
+					<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id12').style.display='none'">Reject</button>
+				</footer>
+			</div>
+		</div>
+
+		<!-- Hospital modal -->
+		<div id="id10" class="w3-modal">
+			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
+				<header class="w3-container w3-theme">
+					<span onclick="document.getElementById('id10').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<h2>Hospital</h2>
+				</header>
+				<div class="w3-cell-row w3-padding">
+					<div class="w3-container w3-cell">
+						<p class="sell-modal">Do you have insurance? </p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p class="subtotal-sell">$0</p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+					</div>
+				</div>
+		
+				<footer class="w3-container w3-theme w3-padding">
+					<button class="w3-button w3-white w3-border" onclick="document.getElementById('id10').style.display='none'">Pay</button>
+					<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id10').style.display='none'">Close</button>
+				</footer>
+			</div>
+		</div>
+</body>
+</html>
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="css/hummingbird.css">
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  	<link rel="stylesheet" type="text/css" href="css/slick.css"/>
+  	<link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main_css.css">
+</head>
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1 class='text-center'>Dope Wars Remake</h1>
+			<button class='start btn btn-lg btn-success center-block'>Start Game</button>
+			<ul>
+				<li>cash</li>
+				<li>bank</li>
+				<li>debt</li>
+				<li>bitches</li>
+				<li>health</li>
+				<li>space</li>
+				<li>guns</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div class="money text-center">$0</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-1">
+				<table class="table table-hover">
+					<tr>
+						<td>Acid: <span id="acid"></span>
+							<span id="acidQty" class="pull-right">0</span><button id='sellAcid' class='btn pull-right'>Sell</button><button
+							 id='buyAcid' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>Cocaine: <span id="cocaine"></span><span id="cocaineQty" class="pull-right">0</span><button id='sellCocaine'
+							 class='btn pull-right'>Sell</button><button id='buyCocaine' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>Ecstasy: <span id='ecstasy'></span><span id="ecstasyQty" class="pull-right">0</span><button id='sellEcstasy'
+							 class='btn pull-right'>Sell</button><button id='buyEcstasy' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>PCP: <span id="pcp"></span><span id="pcpQty" class="pull-right">0</span><button id='sellPcp' class='btn pull-right'>Sell</button><button
+							 id='buyPcp' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>Heroin: <span id="heroin"></span><span id="heroinQty" class="pull-right">0</span><button id='sellHeroin'
+							 class='btn pull-right'>Sell</button><button id='buyHeroin' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>Weed: <span id="weed"></span><span id="weedQty" class="pull-right">0</span><button id='sellWeed' class='btn pull-right'>Sell</button><button
+							 id='buyWeed' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>Speed: <span id="speed"></span><span id="speedQty" class="pull-right">0</span><button id='sellSpeed' class='btn pull-right'>Sell</button><button
+							 id='buySpeed' class='btn pull-right'>Buy</button></td>
+					</tr>
+					<tr>
+						<td>Shrooms: <span id="shrooms"></span><span id="shroomsQty" class="pull-right">0</span><button id='sellShrooms'
+							 class='btn pull-right'>Sell</button><button id='buyShrooms' class='btn pull-right'>Buy</button></td>
+					</tr>
+				</table>
+				<button id='getPrices'>Get Prices</button>
+			</div>
+			<div class='cityTitle pull-right'>Choose the city you want to travel to!!</div>
+			<div class="col-md-3 col-md-offset-3">
+				<button class='btn btn-info city losAngeles'>Los Angeles</button>
+				<hr />
+				<button class='btn btn-info city harlem'>Harlem</button>
+				<hr />
+				<button class='btn  btn-info city bronx'>Bronx</button>
+				<hr />
+				<button class='btn btn-info city chicago'>Chicago</button>
+				<hr />
+				<button class='btn  btn-info city brooklyn'>Brooklyn</button>
+				<hr />
+				<button class='btn btn-info city sanAntonio'>San Antonio</button>
+				<hr />
+				<button class='btn btn-info city miami'>Miami</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/ScrollMagic.js"></script>
+  	<script src="js/plugins/debug.addIndicators.js"></script>
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script src="js/TweenMax.min.js" type="text/javascript"></script>
+	<script src="js/plugins/animation.gsap.js"></script>
+	<script type="text/javascript" src="js/slick.js"></script>
+	<script type="text/javascript" src="js/main_js.js"></script>
+</body>
+</html> -->
