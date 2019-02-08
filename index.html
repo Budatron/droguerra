@@ -5,9 +5,9 @@
 <link rel="stylesheet" href="css/w3pro.css">
 <link rel="stylesheet" href="css/w3-theme-khaki.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<body>
+<body class="w3-theme-l4">
 	
-	<header class="w3-bar w3-card w3-theme">
+	<header class="w3-bar w3-card w3-theme w3-top">
 		<div class="w3-container w3-padding-small w3-theme-d3">
 			<div class='location w3-left'>Manhattan</div>
 			<div class="w3-right">
@@ -31,13 +31,16 @@
 				<td class="w3-padding-small">Space: <span id="space">0</span></td>
 			</tr>
 		</table>
-		<div class="w3-container w3-padding-small w3-theme-l0">
-			<div style="color: red">Health: <span id="health">0</span></div>
+		<div class="w3-container w3-padding-small w3-bar w3-theme-d1">
+			<div class="w3-left" style="color: red; width: 30%">Health: <span id="health">0</span></div>
+			<div class="w3-right w3-theme-d4" style="width: 70%">
+				<div class="w3-container w3-center" style="width:25%; background: green">25%</div>
+			</div>
 		</div>
 		
 	</header>
 
-	<div class=" w3-theme-l4">
+	<div class=" w3-theme-l4" style="padding: 160px 0 80px">
 
 	<ul class="w3-ul">
 		<li class="w3-bar w3-padding-small">
@@ -82,9 +85,10 @@
 
 	</div>
 
-	<footer class="w3-container w3-theme w3-padding-large">
+	<footer class="w3-container w3-theme w3-padding-large w3-bottom">
 		<div class="w3-bar">
 			<button class="w3-button w3-white w3-border" onclick="document.getElementById('id11').style.display='block'">Menu</button>
+			<button class="w3-button w3-white w3-border" onclick="document.getElementById('id11').style.display='block'">Bank</button>
 			<button class="w3-button w3-right w3-white w3-border" onclick="document.getElementById('id01').style.display='block'">Jet</button>
 		</div>
 	</footer>
