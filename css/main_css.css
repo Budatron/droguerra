@@ -4,8 +4,10 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
-html, body, div, span, applet, object, iframe,
+.w3-padding-small{
+  padding: 2px 16px !important;
+}
+/* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -24,9 +26,9 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-}
+} */
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+/* article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -47,7 +49,7 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-}
+} */
 
 /**
  * For modern browsers
@@ -58,55 +60,6 @@ table {
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.cf:after {
-    clear: both;
-}
-
-/**
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
-.cf {
-    *zoom: 1;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-table button {
-  margin: 1px;
-}
-
-span {
-  margin-left: 25px;
-}
-
-.money {
-  margin-bottom: 50px;
-}
-
-.cityTitle {
-  margin-top: -20px;
-  margin-bottom: 20px;
-  margin-right: 110px;
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-.start {
-  margin-top: 20px;
-}
-
-#getPrices {
-  margin: 5px;
-}
 
 
 
