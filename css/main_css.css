@@ -7,6 +7,19 @@
 .w3-padding-small{
   padding: 2px 16px !important;
 }
+
+.progress-bar-1, .progress-bar-2 {
+  height: 15px;
+  
+}
+
+.progress-bar-1{
+  margin-top: 4px;
+}
+
+.progress-bar-2 {
+  font-size: 0.7em;
+}
 /* html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,

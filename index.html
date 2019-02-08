@@ -3,7 +3,8 @@
 <title>Dopewars</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3pro.css">
-<link rel="stylesheet" href="css/w3-theme-khaki.css">
+<!-- <link rel="stylesheet" href="css/w3-theme-khaki.css"> -->
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-grey.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/main_css.css">
 <body class="w3-theme-l4">
@@ -28,14 +29,14 @@
 				<td class="w3-padding-small">Guns: <span id="guns">0</span></td>
 			</tr>
 			<tr>
-				<td class="w3-padding-small">Debt: <span id="debt">$0</span></td>
+				<td class="w3-padding-small" style="color: red;"">Debt: <span id="debt">$0</span></td>
 				<td class="w3-padding-small">Space: <span id="space">0</span></td>
 			</tr>
 		</table>
-		<div class="w3-container w3-padding-small w3-bar w3-theme-d1">
-			<div class="w3-left" style="color: red; width: 30%">Health: <span id="health">0</span></div>
-			<div class="w3-right w3-theme-d4" style="width: 70%">
-				<div class="w3-container w3-center" style="width:25%; background: green">25%</div>
+		<div class="w3-container w3-padding-small w3-bar w3-theme-l4">
+			<div class="w3-left" style="color: green; width: 30%">Health: <span id="health">0</span></div>
+			<div class="w3-right w3-theme-d4 progress-bar-1" style="width: 70%">
+				<div class="w3-container w3-center progress-bar-2" style="width:25%; background: green">25%</div>
 			</div>
 		</div>
 		
@@ -46,41 +47,50 @@
 	<ul class="w3-ul">
 		<li class="w3-bar w3-padding-small">
 			<div class="w3-bar-item w3-padding-small">Acid: </div><span class="w3-bar-item w3-padding-small" id="acid">$0</span>
-				<span id="acidQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">100</span>
+				<span id="acidQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">100</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Cocaine: </div><span class="w3-bar-item w3-padding-small" id="cocaine">$0</span><span id="cocaineQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">10</span>
+			<div class="w3-bar-item w3-padding-small">Cocaine: </div><span class="w3-bar-item w3-padding-small" id="cocaine">$0</span>
+			<span id="cocaineQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">10</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
 			<div class="w3-bar-item w3-padding-small">Ecstasy: </div><span class="w3-bar-item w3-padding-small" id='ecstasy'>$0</span>
-			<span id="ecstasyQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">100</span>
+			<span id="ecstasyQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">100</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">PCP: </div><span class="w3-bar-item w3-padding-small" id="pcp">$0</span><span id="pcpQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">100</span>
+			<div class="w3-bar-item w3-padding-small">PCP: </div><span class="w3-bar-item w3-padding-small" id="pcp">$0</span>
+			<span id="pcpQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">100</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Heroin: </div><span class="w3-bar-item w3-padding-small" id="heroin">$0</span><span id="heroinQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">100</span>
+			<div class="w3-bar-item w3-padding-small">Heroin: </div><span class="w3-bar-item w3-padding-small" id="heroin">$0</span>
+			<span id="heroinQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">100</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Weed: </div><span class="w3-bar-item w3-padding-small" id="weed">$0</span><span id="weedQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">100</span>
+			<div class="w3-bar-item w3-padding-small">Weed: </div><span class="w3-bar-item w3-padding-small" id="weed">$0</span>
+			<span id="weedQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">100</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Speed: </div><span class="w3-bar-item w3-padding-small" id="speed">$0</span><span id="speedQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">100</span>
+			<div class="w3-bar-item w3-padding-small">Speed: </div><span class="w3-bar-item w3-padding-small" id="speed">$0</span>
+			<span id="speedQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">100</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Shrooms: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span><span id="shroomsQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right" style="width: 70px">10</span>
+			<div class="w3-bar-item w3-padding-small">Shrooms: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span>
+			<span id="shroomsQty" class="w3-right w3-theme-l2 " style="width: 50px; text-align: center">10</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Hashish: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span><span id="shroomsQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right"
-			 style="width: 70px">1000</span>
+			<div class="w3-bar-item w3-padding-small">Hashish: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span>
+			<span id="shroomsQty" class="w3-right w3-theme-l2 "
+			 style="width: 50px; text-align: center">1000</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Ludes: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span><span id="shroomsQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right"
-			 style="width: 70px">1000</span>
+			<div class="w3-bar-item w3-padding-small">Ludes: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span>
+			<span id="shroomsQty" class="w3-right w3-theme-l2 "
+			 style="width: 50px; text-align: center">1000</span>
 		</li>
 		<li class="w3-bar w3-padding-small">
-			<div class="w3-bar-item w3-padding-small">Peyote: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span><span id="shroomsQty" class="w3-right w3-bar-item w3-padding-small w3-theme-l2 w3-margin-right"
-			 style="width: 70px">1000</span>
+			<div class="w3-bar-item w3-padding-small">Peyote: </div><span class="w3-bar-item w3-padding-small" id="shrooms">$0</span>
+			<span id="shroomsQty" class="w3-right w3-theme-l2 "
+			 style="width: 50px; text-align: center">1000</span>
 		</li>
 	</ul>
 
