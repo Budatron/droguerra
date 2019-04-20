@@ -403,13 +403,6 @@ $(document).ready(function () {
         exit_sell();
     })
 
-    $("#jet_modal li button").each(function(i) {
-      $(this).click(function(eventObject) {
-        $("#jet_modal").css("display", "none");
-        move_to($(this).attr("id"))
-      });
-    });
-
     $("#buy_modal input").on('input', function () {
         buy_info($(this).val())          
     });
@@ -417,14 +410,38 @@ $(document).ready(function () {
     $("#sell_modal input").on('input', function () {
         sell_info($(this).val())          
     });
-    // /* adding sell buttons */
-    // $("#sell_list li a").each(function (i) {
-    //     $(this).click(function (eventObject) {
-    //         sell_button($(this).attr("id"));
-    //     });
-    // });
    
-    
+    $("#jet_modal li button").each(function(i) {
+        $(this).click(function(eventObject) {
+            $("#jet_modal").css("display", "none");
+            move_to($(this).attr("id"))
+        });
+    });
+
+
+    $("#bank_modal button").each(function(i) {
+       
+    });
+
+    $("#menu button").each(function(i) {
+       
+    });
+
+    $("#hospital button").each(function(i) {
+       
+    });
+
+    $("#stuff button").each(function(i) {
+       
+    });
+
+    $("#fight button").each(function(i) {
+       
+    });
+
+    $("#shark button").each(function(i) {
+       
+    });
 
     /* first refresh */
     refresh_view();
