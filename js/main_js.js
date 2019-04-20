@@ -189,6 +189,7 @@ function refresh_view() {
 
     /* inventory box */
     $("#price_list .drug").each(function() {
+        console.log(player.inventory[$(this).attr("id")])
       $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
     });
     // $("#buy_modal input").attr('placeholder', supply.can_buy)
@@ -252,7 +253,7 @@ function buy_Info(item) {
 
 function exit_buy(){
     player.money = player.money - ($("#buy_modal input").val() * price);  // pay moneys
-    player.inventory[supply.current_item] = player.inventory[supply.current_item] + $("#buy_modal input").val();  // get items
+    player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) + parseInt($("#buy_modal input").val());  // get items
     player.space = player.space - $("#buy_modal input").val();
     refresh_view();
 }
