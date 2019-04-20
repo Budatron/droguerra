@@ -146,6 +146,8 @@ function Supply_Object(){
     this.current_item = "";
     this.current_price = 0;
     this.can_buy = 0;
+    this.can_sell = 0;
+    this.price_list;
 }
 
 /* Game Data */
@@ -189,13 +191,15 @@ function refresh_view() {
 
     /* inventory box */
     $("#price_list .drug").each(function() {
-        console.log(player.inventory[$(this).attr("id")])
       $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
     });
     // $("#buy_modal input").attr('placeholder', supply.can_buy)
-
+// console.log(supply.current_price)
+    $("#buy_modal input").attr('max', supply.can_buy)
+    $("#sell_modal input").attr('max', supply.can_sell)
     $('.buy-modal').text(supply.current_item);
     $("#buy_modal .subtotal").text( '$' + supply.current_price);
+    $("#sell_modal .subtotal").text( '$' + supply.current_price);
     $('.sell-modal').text(supply.current_item);
     $('#space').text(player.space)
 }
@@ -203,13 +207,13 @@ function refresh_view() {
 function move_to(place) {
     player.advance_day();
     place = location_map[place];
-    price_list = place.get_price_list();
+    supply.price_list = place.get_price_list();
     // player.price_list = price_list;
-// console.log(price_list)
+
     $(".location").text(place.name);
 
     $("#price_list .drug").each(function () {
-        $(this).find('.price').text('$' + price_list[$(this).attr("id")]);
+        $(this).find('.price').text('$' + supply.price_list[$(this).attr("id")]);
     });
 
     refresh_view();
@@ -223,32 +227,30 @@ function deal_item(item) {
 }
 
 function buy_verify(){
-    price = price_list[supply.current_item];
+    price = supply.price_list[supply.current_item];
     if(price < player.money){
         $('#deal_modal').css("display", "none");
         $('#buy_modal').css('display', 'block');
         $("#buy_modal input").val(1);
-        buy_Info(1);
+        buy_info(1);
     }else {
         alert("GET MONEY FIRST DUH");
     }
 }
 
-function buy_Info(item) {
-    if (supply.current_item in price_list) { //this will just straight up crash, meh.
-        price = price_list[supply.current_item];
+function buy_info(item) {
+    // if (supply.current_item in price_list) { //this will just straight up crash, meh.
+        price = supply.price_list[supply.current_item];
         // player.max_items = Math.floor(player.money / price);
         var max_items = Math.floor(player.money / price);
         supply.can_buy = max_items;
         if(max_items > player.space)supply.can_buy = player.space 
         supply.current_price = price * item;
-        $("#buy_modal input").attr('max', supply.can_buy)
-
         refresh_view();
-    }
-    else {
-        alert("GO SOMEWHERE FIRST DUH");
-    }
+    // }
+    // else {
+    //     alert("GO SOMEWHERE FIRST DUH");
+    // }
 }
 
 function exit_buy(){
@@ -258,19 +260,35 @@ function exit_buy(){
     refresh_view();
 }
 
-function sell_button(item) {
+function sell_verify(){
+    if (player.inventory[supply.current_item]) {
+        $('#deal_modal').css("display", "none");
+        $('#sell_modal').css('display', 'block');
+        $("#sell_modal input").val(1);
+        sell_info(1);
+    }else {
+        alert("NOTHING TO SELL");
+    }
+}
+
+function sell_info(item) {
     //sell whole inventory
-    if (item in player.price_list) { //this will just straight up crash, meh.
-        price = player.price_list[item];
-        items = player.inventory[item];
-        profit = items * price;
-        player.inventory[item] = 0;
-        player.money = player.money + profit;
+    // if (item in supply.price_list) { //this will just straight up crash, meh.
+        price = supply.price_list[supply.current_item];
+        supply.current_price = item * price;
+        supply.can_sell = player.inventory[supply.current_item];
         refresh_view();
-    }
-    else {
-        alert("GO SOMEWHERE FIRST DUH");
-    }
+    // }
+    // else {
+    //     alert("GO SOMEWHERE FIRST DUH");
+    // }
+}
+
+function exit_sell(){
+    player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) - parseInt($("#sell_modal input").val());
+    player.money = player.money + supply.current_price;
+    player.space = player.space + parseInt($("#sell_modal input").val());
+    refresh_view();
 }
 
 function submit_loan_shark_request() {
@@ -365,7 +383,7 @@ $(document).ready(function () {
 
     $('.buy-max').on('click', function () {
         $("#buy_modal input").val(supply.can_buy);
-        buy_Info(supply.can_buy);
+        buy_info(supply.can_buy);
     })
 
     $('.exit-buy').on('click', function () {
@@ -373,8 +391,16 @@ $(document).ready(function () {
     })
 
     $('#sell_button').on('click', function () {
-        $('#deal_modal').css("display", "none");
-        $('#sell_modal').css('display', 'block');
+        sell_verify();
+    })
+
+    $('.sell-max').on('click', function () {
+        $("#sell_modal input").val(supply.can_sell);
+        sell_info(supply.can_sell);
+    })
+
+    $('.exit-sell').on('click', function () {
+        exit_sell();
     })
 
     $("#jet_modal li button").each(function(i) {
@@ -385,11 +411,11 @@ $(document).ready(function () {
     });
 
     $("#buy_modal input").on('input', function () {
-        buy_Info($(this).val())          
+        buy_info($(this).val())          
     });
 
     $("#sell_modal input").on('input', function () {
-        sell_button($(this).val())          
+        sell_info($(this).val())          
     });
     // /* adding sell buttons */
     // $("#sell_list li a").each(function (i) {
