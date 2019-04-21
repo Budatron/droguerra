@@ -5,8 +5,16 @@ body{
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 20px;
 }
+
+.w3-ul li{
+  border: none;
+}
+.w3-ul li button{
+  border-radius: 5px;
+}
+
 .w3-padding-small{
   padding: 2px 16px !important;
 }
@@ -76,7 +84,7 @@ footer button span{
   background: #f2f2f2;
   border-radius: 5px;
   margin-bottom: 3px;
-  padding: 2px 4px;
+  padding: 0px 4px;
 }
 
 #price_list {
@@ -89,4 +97,8 @@ footer button span{
 
 #price_list li:nth-child(odd) .qty{
   /* border: #ddd solid; */
+}
+
+#bank_modal footer button, #jet_modal footer button{
+  text-transform: uppercase;
 }

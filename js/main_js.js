@@ -128,6 +128,7 @@ function Player_Object() {
     this.daily_interest = 0.1;
     this.max_items = 30;
     this.space = 30;
+    this.bank = 0;
 
     this.advance_day = function () {
         if (this.days_left > 0) {
@@ -186,7 +187,7 @@ function refresh_view() {
     // $("#player_name").text(player.name);
     $("#cash").text(player.money);
     $("#days_left").text(player.days_left);
-
+    $("#bank").text(player.bank);
     $("#debt").text(player.debt);
 
     /* inventory box */
@@ -278,20 +279,14 @@ function sell_verify(){
 }
 
 function sell_info(item) {
-    //sell whole inventory
-    // if (item in supply.price_list) { //this will just straight up crash, meh.
         price = supply.price_list[supply.current_item];
         supply.current_price = item * price;
         supply.can_sell = player.inventory[supply.current_item];
         refresh_view();
-    // }
-    // else {
-    //     alert("GO SOMEWHERE FIRST DUH");
-    // }
+
 }
 
 function exit_sell(){
-    console.log($("#buy_modal input").val() , supply.can_sell)
     if($("#sell_modal input").val() <= supply.can_sell){
         player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) - parseInt($("#sell_modal input").val());
         player.money = player.money + supply.current_price;
@@ -301,6 +296,27 @@ function exit_sell(){
     else {
             alert("YOU CAN'T SELL TOO MUCH");
         }
+}
+
+function bank_save(){
+    if($("#bank_modal input").val() < player.money){
+        player.money = parseInt(player.money) - parseInt($("#bank_modal input").val());
+        player.bank = parseInt(player.bank) + parseInt($("#bank_modal input").val());
+        refresh_view();
+    }else {
+        alert("YOU CAN'T SAVE THAT AMOUNT");
+    }
+}
+
+function bank_withdraw(){
+    console.log($("#bank_modal input").val(), player.bank)
+    if($("#bank_modal input").val() <= player.bank){
+        player.money = parseInt(player.money) + parseInt($("#bank_modal input").val());
+        player.bank = parseInt(player.bank) - parseInt($("#bank_modal input").val());
+        refresh_view();
+    }else {
+        alert("YOU CAN'T WITHDRAW THAT AMOUNT");
+    }
 }
 
 function submit_loan_shark_request() {
@@ -431,9 +447,13 @@ $(document).ready(function () {
     });
 
 
-    $("#bank_modal button").each(function(i) {
-       
+    $("#bank_modal .save-money").on('click', function(i) {
+       bank_save();
     });
+
+    $("#bank_modal .withdraw-money").on('click', function(i) {
+        bank_withdraw();
+     });
 
     $("#menu button").each(function(i) {
        

@@ -120,7 +120,7 @@
 	<div id="jet_modal" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 			<header class="w3-container w3-theme">
-				<span onclick="document.getElementById('jet_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<!-- <span onclick="document.getElementById('jet_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 				<h2>Travel</h2>
 			</header>
 			<ul class="w3-ul w3-container w3-theme">
@@ -140,7 +140,7 @@
 				<button class='w3-button w3-padding-small w3-block btn-info city' id='miami'>Miami</button></li>
 				</ul>
 			<footer class="w3-container w3-theme w3-padding">
-				<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('jet_modal').style.display='none'">Close</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('jet_modal').style.display='none'">Close</button>
 			</footer>
 		</div>
 	</div>
@@ -165,9 +165,9 @@
 			</div>
 				
 			<footer class="w3-container w3-theme w3-padding">
-				<button class="w3-button w3-padding-small w3-white w3-border buy-max">Max</button>
-				<button class="w3-button w3-padding-small w3-white w3-border exit-buy" onclick="document.getElementById('buy_modal').style.display='none'">Buy</button>
-				<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('buy_modal').style.display='none'">Close</button>
+				<button class="w3-button buy-max">MAX</button>
+				<button class="w3-button exit-buy" onclick="document.getElementById('buy_modal').style.display='none'">BUY</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('buy_modal').style.display='none'">CLOSE</button>
 			</footer>
 		</div>
 	</div>
@@ -209,8 +209,8 @@
 			<ul class="w3-ul w3-container w3-theme">
 				<li>
 					<button class='w3-button w3-padding-small w3-block btn-info new-game'>New Game</button></li>
-				<li>
-					<button class='w3-button w3-padding-small w3-block btn-info info'>Info</button></li>
+				<!-- <li>
+					<button class='w3-button w3-padding-small w3-block btn-info info'>Info</button></li> -->
 				<li>
 					<button class='w3-button w3-padding-small w3-block btn-info help'>Help</button></li>
 				<li>
@@ -305,25 +305,25 @@
 		<div id="bank_modal" class="w3-modal">
 			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 				<header class="w3-container w3-theme">
-					<span onclick="document.getElementById('bank_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<!-- <span onclick="document.getElementById('bank_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 					<h2>Bank</h2>
 				</header>
-				<div class="w3-cell-row w3-padding w3-theme">
-					<div class="w3-container w3-cell">
-						<p class="sell-modal">What you whant to do? </p>
+				<div class="w3-cell-row w3-theme">
+					<div class="w3-container">
+						<p class="">What you whant to do? </p>
 					</div>
-					<div class="w3-container w3-cell">
-						<p class="subtotal-sell">$0</p>
-					</div>
-					<div class="w3-container w3-cell">
+					<!-- <div class="w3-container">
+						<p class="bank-transaction">$0</p>
+					</div> -->
+					<div class="w3-container">
 						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
 					</div>
 				</div>
 		
 				<footer class="w3-container w3-theme w3-padding">
-					<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('bank_modal').style.display='none'">Save</button>
-					<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('bank_modal').style.display='none'">Withdraw</button>
-					<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('bank_modal').style.display='none'">Close</button>
+					<button class="w3-button save-money" onclick="document.getElementById('bank_modal').style.display='none'">Save</button>
+					<button class="w3-button withdraw-money" onclick="document.getElementById('bank_modal').style.display='none'">Withdraw</button>
+					<button class="w3-button w3-right" onclick="document.getElementById('bank_modal').style.display='none'">Close</button>
 				</footer>
 			</div>
 		</div>
