@@ -91,6 +91,16 @@ footer button span{
   margin: 0 16px;
 }
 
+#inventory_list li{
+  border-radius: 5px;
+  margin-bottom: 3px;
+  padding: 0px 4px;
+}
+
+#inventory_list {
+  /* margin: 0 16px; */
+}
+
 .qty{
   /* border: #eee solid; */
 }
@@ -99,6 +109,6 @@ footer button span{
   /* border: #ddd solid; */
 }
 
-#bank_modal footer button, #jet_modal footer button{
+#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button {
   text-transform: uppercase;
 }

@@ -206,7 +206,7 @@
 				<span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
 				<h2>Menu</h2>
 			</header>
-			<ul class="w3-ul w3-container w3-theme">
+			<ul class="w3-ul w3-container w3-theme w3-padding">
 				<li>
 					<button class='w3-button w3-padding-small w3-block btn-info new-game'>New Game</button></li>
 				<!-- <li>
@@ -232,21 +232,23 @@
 			<header class="w3-container w3-theme">
 				<h2>Fight</h2>
 			</header>
-			<div class="w3-cell-row w3-padding w3-theme">
-				<div class="w3-container w3-cell">
+			<div class="w3-theme w3-padding">
+				<div class="w3-container w3-cell-row">
 					<p class="fight-text">The police found you in a compromising situation.</p>
 				</div>
-				<div class="w3-container w3-cell">
-					<p class="health-text">Health: </p>
-				</div>
-				<div class="w3-container w3-cell">
-					<p class="health">100</p>
+				<div class="w3-cell-row">
+					<div class="w3-container w3-cell">
+						<p class="health-text">Health: </p>
+					</div>
+					<div class="w3-container w3-cell">
+						<p class="health">100</p>
+					</div>
 				</div>
 			</div>
 	
 			<footer class="w3-container w3-theme w3-padding">
-				<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('fight').style.display='none'">Run</button>
-				<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('fight').style.display='none'">Fight</button>
+				<button class="w3-button" onclick="document.getElementById('fight').style.display='none'">Run</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('fight').style.display='none'">Fight</button>
 			</footer>
 		</div>
 	</div>
@@ -269,7 +271,7 @@
 		
 				<footer class="w3-container w3-theme w3-padding">
 					
-					<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('msg').style.display='none'">OK</button>
+					<button class="w3-button w3-right" onclick="document.getElementById('msg').style.display='none'">OK</button>
 				</footer>
 			</div>
 		</div>
@@ -282,21 +284,21 @@
 					<h2>Shark</h2>
 				</header>
 				<div class="w3-cell-row w3-padding w3-theme">
-					<div class="w3-container w3-cell">
-						<p class="sell-modal">What you whant to do? </p>
+					<div class="w3-container">
+						<p class="">Do you have my money? </p>
 					</div>
-					<div class="w3-container w3-cell">
+					<!-- <div class="w3-container">
 						<p class="subtotal-sell">$0</p>
-					</div>
-					<div class="w3-container w3-cell">
+					</div> -->
+					<div class="w3-container">
 						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
 					</div>
 				</div>
 		
 				<footer class="w3-container w3-theme w3-padding">
-					<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('shark').style.display='none'">Pay</button>
-					<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('shark').style.display='none'">Loan</button>
-					<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('shark').style.display='none'">Close</button>
+					<button class="w3-button pay-loan" onclick="document.getElementById('shark').style.display='none'">Pay</button>
+					<button class="w3-button loan" onclick="document.getElementById('shark').style.display='none'">Loan</button>
+					<button class="w3-button w3-right" onclick="document.getElementById('shark').style.display='none'">Close</button>
 				</footer>
 			</div>
 		</div>
@@ -308,7 +310,7 @@
 					<!-- <span onclick="document.getElementById('bank_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 					<h2>Bank</h2>
 				</header>
-				<div class="w3-cell-row w3-theme">
+				<div class="w3-cell-row w3-theme w3-padding">
 					<div class="w3-container">
 						<p class="">What you whant to do? </p>
 					</div>
@@ -332,22 +334,22 @@
 		<div id="stuff" class="w3-modal">
 			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 				<header class="w3-container w3-theme">
-					<span onclick="document.getElementById('stuff').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<!-- <span onclick="document.getElementById('stuff').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 					<h2>Buy stuffs</h2>
 				</header>
-				<div class="w3-cell-row w3-padding w3-theme">
-					<div class="w3-container w3-cell">
+				<div class="w3-cell-row w3-theme w3-padding">
+					<div class="w3-container">
 						<p class="buy-stuff-text">Buy big coat for: </p>
 					</div>
-					<div class="w3-container w3-cell">
+					<div class="w3-container">
 						<p class="buy-stuff-price">$0</p>
 					</div>
 					
 				</div>
 		
 				<footer class="w3-container w3-theme w3-padding">
-					<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('stuff').style.display='none'">Buy</button>
-					<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('stuff').style.display='none'">Reject</button>
+					<button class="w3-button" onclick="document.getElementById('stuff').style.display='none'">Buy</button>
+					<button class="w3-button w3-right " onclick="document.getElementById('stuff').style.display='none'">Reject</button>
 				</footer>
 			</div>
 		</div>
@@ -356,24 +358,24 @@
 		<div id="hospital" class="w3-modal">
 			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 				<header class="w3-container w3-theme">
-					<span onclick="document.getElementById('hospital').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<!-- <span onclick="document.getElementById('hospital').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 					<h2>Hospital</h2>
 				</header>
-				<div class="w3-cell-row w3-padding w3-theme">
-					<div class="w3-container w3-cell">
-						<p class="sell-modal">Do you have insurance? </p>
+				<div class="w3-cell-row w3-theme w3-padding">
+					<div class="w3-container">
+						<p class="">Do you have insurance? </p>
 					</div>
-					<div class="w3-container w3-cell">
-						<p class="subtotal-sell">$0</p>
+					<div class="w3-container">
+						<p class="subtotal-hospital">$0</p>
 					</div>
-					<div class="w3-container w3-cell">
+					<div class="w3-container">
 						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
 					</div>
 				</div>
 		
 				<footer class="w3-container w3-theme w3-padding">
-					<button class="w3-button w3-padding-small w3-white w3-border" onclick="document.getElementById('hospital').style.display='none'">Pay</button>
-					<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('hospital').style.display='none'">Close</button>
+					<button class="w3-button" onclick="document.getElementById('hospital').style.display='none'">Pay</button>
+					<button class="w3-button w3-right" onclick="document.getElementById('hospital').style.display='none'">Close</button>
 				</footer>
 			</div>
 		</div>
@@ -403,60 +405,60 @@
 	<div id="inventory" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 			<header class="w3-container w3-theme">
-				<span onclick="document.getElementById('inventory').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<!-- <span onclick="document.getElementById('inventory').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 				<h2>Inventory</h2>
 			</header>
-			<ul class="w3-ul w3-theme" >
-				<li class="w3-bar w3-padding-small w3-button drug" id="acid">
-					<div class="w3-bar-item w3-padding-small">Acid: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-						<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">100</span>
+			<ul class="w3-ul w3-theme w3-container" id="inventory_list">
+				<li class="w3-bar w3-button drug" id="acid">
+					<div class="w3-bar-item w3-padding-small">Acid: </div>
+						<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="cocain">
-					<div class="w3-bar-item w3-padding-small">Cocaine: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">10</span>
+				<li class="w3-bar w3-button drug" id="cocain">
+					<div class="w3-bar-item w3-padding-small">Cocaine: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">10</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="ecstasy">
-					<div class="w3-bar-item w3-padding-small">Ecstasy: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">100</span>
+				<li class="w3-bar w3-button drug" id="ecstasy">
+					<div class="w3-bar-item w3-padding-small">Ecstasy: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="pcp">
-					<div class="w3-bar-item w3-padding-small">PCP: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">100</span>
+				<li class="w3-bar w3-button drug" id="pcp">
+					<div class="w3-bar-item w3-padding-small">PCP: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="heroin">
-					<div class="w3-bar-item w3-padding-small">Heroin: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">100</span>
+				<li class="w3-bar w3-button drug" id="heroin">
+					<div class="w3-bar-item w3-padding-small">Heroin: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="weed">
-					<div class="w3-bar-item w3-padding-small">Weed: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">100</span>
+				<li class="w3-bar w3-button drug" id="weed">
+					<div class="w3-bar-item w3-padding-small">Weed: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="speed">
-					<div class="w3-bar-item w3-padding-small">Speed: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">100</span>
+				<li class="w3-bar w3-button drug" id="speed">
+					<div class="w3-bar-item w3-padding-small">Speed: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="shrooms">
-					<div class="w3-bar-item w3-padding-small">Shrooms: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty" style="width: 50px; text-align: center">10</span>
+				<li class="w3-bar w3-button drug" id="shrooms">
+					<div class="w3-bar-item w3-padding-small">Shrooms: </div>
+					<span class="w3-right qty" style="width: 50px; text-align: center">10</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="hashish">
-					<div class="w3-bar-item w3-padding-small">Hashish: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty"
+				<li class="w3-bar w3-button drug" id="hashish">
+					<div class="w3-bar-item w3-padding-small">Hashish: </div>
+					<span class="w3-right qty"
 					 style="width: 50px; text-align: center">1000</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="ludes">
-					<div class="w3-bar-item w3-padding-small">Ludes: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty"
+				<li class="w3-bar w3-button drug" id="ludes">
+					<div class="w3-bar-item w3-padding-small">Ludes: </div>
+					<span class="w3-right qty"
 					 style="width: 50px; text-align: center">1000</span>
 				</li>
-				<li class="w3-bar w3-padding-small w3-button drug" id="peyote">
-					<div class="w3-bar-item w3-padding-small">Peyote: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-					<span class="w3-right w3-theme-l2 qty"
+				<li class="w3-bar w3-button drug" id="peyote">
+					<div class="w3-bar-item w3-padding-small">Peyote: </div>
+					<span class="w3-right qty"
 					 style="width: 50px; text-align: center">1000</span>
 				</li>
 			</ul>
 			<footer class="w3-container w3-theme w3-padding">
-				<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('inventory').style.display='none'">Close</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('inventory').style.display='none'">Close</button>
 			</footer>
 		</div>
 	</div>

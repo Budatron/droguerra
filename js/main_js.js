@@ -194,6 +194,9 @@ function refresh_view() {
     $("#price_list .drug").each(function() {
       $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
     });
+    $("#inventory_list .drug").each(function() {
+        $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
+      });
     // $("#buy_modal input").attr('placeholder', supply.can_buy)
 // console.log(supply.current_price)
     $("#buy_modal input").attr('max', supply.can_buy)
@@ -299,7 +302,7 @@ function exit_sell(){
 }
 
 function bank_save(){
-    if($("#bank_modal input").val() < player.money){
+    if($("#bank_modal input").val() <= player.money){
         player.money = parseInt(player.money) - parseInt($("#bank_modal input").val());
         player.bank = parseInt(player.bank) + parseInt($("#bank_modal input").val());
         refresh_view();
@@ -309,7 +312,6 @@ function bank_save(){
 }
 
 function bank_withdraw(){
-    console.log($("#bank_modal input").val(), player.bank)
     if($("#bank_modal input").val() <= player.bank){
         player.money = parseInt(player.money) + parseInt($("#bank_modal input").val());
         player.bank = parseInt(player.bank) - parseInt($("#bank_modal input").val());
@@ -319,36 +321,56 @@ function bank_withdraw(){
     }
 }
 
-function submit_loan_shark_request() {
-    deposit = parseInt($("#loan_shark_deposit").attr("value"));
-    withdraw = parseInt($("#loan_shark_withdraw").attr("value"));
-
-    if (deposit >= 0) {
-        player.money = player.money - deposit;
-        player.debt = player.debt - deposit;
+function shark_pay(){
+    if($("#shark input").val() <= player.money && $("#shark input").val() <= player.loan){
+        player.money = parseInt(player.money) - parseInt($("#shark input").val());
+        player.loan = parseInt(player.loan) - parseInt($("#shark input").val());
+        refresh_view();
+    }else {
+        alert("YOU CAN'T PAY THAT MUCH");
     }
-    else {
-        alert(deposit + " is not a number you can deposit with.");
-    }
-
-    if (withdraw >= 0) {
-        player.money = player.money + withdraw;
-        player.debt = player.debt + withdraw;
-    }
-    else {
-        alert(withdraw + " is not a number you can withdraw with.");
-    }
-
-    player.money = player.money < 0 ? 0 : player.money;
-    player.debt = player.debt < 0 ? 0 : player.debt;
-
-    $("#loan_shark_deposit").attr("value", 0);
-    $("#loan_shark_withdraw").attr("value", 0);
-
-    refresh_view();
-
-
 }
+
+function shark_loan(){
+    if($("#shark input").val() > 0){
+        player.money = parseInt(player.money) + parseInt($("#shark input").val());
+        player.loan = parseInt(player.loan) + parseInt($("#shark input").val());
+        refresh_view();
+    }else {
+        alert("YOU CAN'T HAVE NOTHING");
+    }
+}
+
+// function submit_loan_shark_request() {
+//     deposit = parseInt($("#loan_shark_deposit").attr("value"));
+//     withdraw = parseInt($("#loan_shark_withdraw").attr("value"));
+
+//     if (deposit >= 0) {
+//         player.money = player.money - deposit;
+//         player.debt = player.debt - deposit;
+//     }
+//     else {
+//         alert(deposit + " is not a number you can deposit with.");
+//     }
+
+//     if (withdraw >= 0) {
+//         player.money = player.money + withdraw;
+//         player.debt = player.debt + withdraw;
+//     }
+//     else {
+//         alert(withdraw + " is not a number you can withdraw with.");
+//     }
+
+//     player.money = player.money < 0 ? 0 : player.money;
+//     player.debt = player.debt < 0 ? 0 : player.debt;
+
+//     $("#loan_shark_deposit").attr("value", 0);
+//     $("#loan_shark_withdraw").attr("value", 0);
+
+//     refresh_view();
+
+
+// }
 
 // function render_new_page(caller_id) {
 //     /* Turn off the old selected item to turn on the new one*/
@@ -454,6 +476,14 @@ $(document).ready(function () {
     $("#bank_modal .withdraw-money").on('click', function(i) {
         bank_withdraw();
      });
+
+     $("#shark .pay-loan").on('click', function(i) {
+        shark_pay();
+     });
+ 
+     $("#shark .loan").on('click', function(i) {
+         shark_loan();
+      });
 
     $("#menu button").each(function(i) {
        
