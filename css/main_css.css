@@ -70,3 +70,4 @@ footer button span{
 
 #price_list li:nth-child(odd){background: #f2f2f2 !important;}
 
+#price_list li:nth-child(odd):hover {background-color: #ccc !important;}
