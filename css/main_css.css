@@ -4,6 +4,9 @@ body{
   font-family: 'Ubuntu';
 }
 
+h2 {
+  font-size: 24px;
+}
 .w3-padding-small{
   padding: 2px 16px !important;
 }
@@ -55,19 +58,35 @@ footer button div{
   display: grid;
 }
 footer button i{
-  font-size: 34px;
+  font-size: 30px;
 }
 footer button span{
   font-size: 12px;
 }
 
-.dot-line{
-  border-style: dotted hidden hidden hidden;
-  display: inline-block;
-  height: 10px;
-  width: 50%;
+.calendar{
+  position: relative;
+  top: 3px;
 }
 
-#price_list li:nth-child(odd){background: #f2f2f2 !important;}
+/* #price_list li:nth-child(odd){background: #f2f2f2}
+#price_list li:nth-child(odd):hover {background-color: #ccc !important;} */
 
-#price_list li:nth-child(odd):hover {background-color: #ccc !important;}
+#price_list li{
+  background: #f2f2f2;
+  border-radius: 5px;
+  margin-bottom: 3px;
+  padding: 2px 4px;
+}
+
+#price_list {
+  margin: 0 16px;
+}
+
+.qty{
+  /* border: #eee solid; */
+}
+
+#price_list li:nth-child(odd) .qty{
+  /* border: #ddd solid; */
+}
