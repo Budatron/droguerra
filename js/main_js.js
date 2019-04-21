@@ -254,10 +254,16 @@ function buy_info(item) {
 }
 
 function exit_buy(){
-    player.money = player.money - ($("#buy_modal input").val() * price);  // pay moneys
-    player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) + parseInt($("#buy_modal input").val());  // get items
-    player.space = player.space - $("#buy_modal input").val();
-    refresh_view();
+    if($("#buy_modal input").val() <= supply.can_buy){
+        player.money = player.money - ($("#buy_modal input").val() * price);  // pay moneys
+        player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) + parseInt($("#buy_modal input").val());  // get items
+        player.space = player.space - $("#buy_modal input").val();
+        refresh_view();
+    }
+    else {
+        alert("YOU CAN'T BUY TOO MUCH");
+    }
+    
 }
 
 function sell_verify(){
@@ -285,10 +291,16 @@ function sell_info(item) {
 }
 
 function exit_sell(){
-    player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) - parseInt($("#sell_modal input").val());
-    player.money = player.money + supply.current_price;
-    player.space = player.space + parseInt($("#sell_modal input").val());
-    refresh_view();
+    console.log($("#buy_modal input").val() , supply.can_sell)
+    if($("#sell_modal input").val() <= supply.can_sell){
+        player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) - parseInt($("#sell_modal input").val());
+        player.money = player.money + supply.current_price;
+        player.space = player.space + parseInt($("#sell_modal input").val());
+        refresh_view();
+    }
+    else {
+            alert("YOU CAN'T SELL TOO MUCH");
+        }
 }
 
 function submit_loan_shark_request() {
