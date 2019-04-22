@@ -481,9 +481,18 @@ $(document).ready(function () {
         bank_withdraw();
      });
 
+     $(".button-bank").on('click', function(i) {
+        $("#bank_modal input").val(1)
+     }); 
+
+     $(".button-hospital").on('click', function(i) {
+        $("#hospital input").val(1)
+     }); 
+
      $(".button-shark").on('click', function(i) {
         $("#shark input").val(1)
      }); 
+
      $("#shark .pay-loan").on('click', function(i) {
         shark_pay();
      });

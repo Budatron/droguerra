@@ -117,3 +117,40 @@ footer button span{
   width: 50%;
   margin: 0 auto;
 }
+
+.header-container{
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.board{
+  padding: 160px 0 80px
+}
+
+@media only screen and (min-width: 600px) {
+  .header-container{
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
+  #price_list{
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+  }
+
+  .board{
+    padding: 120px 0 80px
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  .header-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+  }
+
+  .board{
+    padding: 100px 0 80px
+  }
+}
