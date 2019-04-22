@@ -220,6 +220,10 @@ function move_to(place) {
         $(this).find('.price').text('$' + supply.price_list[$(this).attr("id")]);
     });
 
+    $('.bottom-button').hide();
+    if(place.name == 'Miami') $('.button-bank').show();
+    if(place.name == 'Bronx') $('.button-shark').show();
+    if(place.name == 'San Antonio') $('.button-hospital').show();
     refresh_view();
  
 }
@@ -504,6 +508,8 @@ $(document).ready(function () {
     $("#shark button").each(function(i) {
        
     });
+
+    $('.bottom-button').hide();
 
     /* first refresh */
     refresh_view();
