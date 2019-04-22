@@ -201,7 +201,7 @@ function refresh_view() {
 // console.log(supply.current_price)
     $("#buy_modal input").attr('max', supply.can_buy)
     $("#sell_modal input").attr('max', supply.can_sell)
-    $('.buy-modal').text(supply.current_item);
+    $('.buy-modal').text(supply.current_item).css('text-transform', 'capitalize');
     $("#buy_modal .subtotal").text( '$' + supply.current_price);
     $("#sell_modal .subtotal").text( '$' + supply.current_price);
     $('.sell-modal').text(supply.current_item);
@@ -326,9 +326,9 @@ function bank_withdraw(){
 }
 
 function shark_pay(){
-    if($("#shark input").val() <= player.money && $("#shark input").val() <= player.loan){
+    if($("#shark input").val() <= player.money){
         player.money = parseInt(player.money) - parseInt($("#shark input").val());
-        player.loan = parseInt(player.loan) - parseInt($("#shark input").val());
+        player.debt = parseInt(player.debt) - parseInt($("#shark input").val());
         refresh_view();
     }else {
         alert("YOU CAN'T PAY THAT MUCH");
@@ -338,7 +338,7 @@ function shark_pay(){
 function shark_loan(){
     if($("#shark input").val() > 0){
         player.money = parseInt(player.money) + parseInt($("#shark input").val());
-        player.loan = parseInt(player.loan) + parseInt($("#shark input").val());
+        player.debt = parseInt(player.debt) + parseInt($("#shark input").val());
         refresh_view();
     }else {
         alert("YOU CAN'T HAVE NOTHING");
@@ -481,6 +481,9 @@ $(document).ready(function () {
         bank_withdraw();
      });
 
+     $(".button-shark").on('click', function(i) {
+        $("#shark input").val(1)
+     }); 
      $("#shark .pay-loan").on('click', function(i) {
         shark_pay();
      });

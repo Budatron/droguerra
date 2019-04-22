@@ -103,7 +103,7 @@
 		<div class="w3-bar">
 			
 			<button class="w3-button" onclick="document.getElementById('menu').style.display='block'"><div><i class="material-icons">home</i><span>Menu</span></div></button>
-			<button class="w3-button" onclick="document.getElementById('inventory').style.display='block'"><div><i class="material-icons">format_list_bulleted</i><span>Invent</span></div></button>
+			<button class="w3-button" onclick="document.getElementById('inventory').style.display='block'"><div><i class="material-icons">format_list_bulleted</i><span>Stock</span></div></button>
 
 			<button class="w3-button bottom-button button-bank" onclick="document.getElementById('bank_modal').style.display='block'"><div><i class="material-icons">account_balance</i><span>Bank</span></div></button>
 			<button class="w3-button bottom-button button-hospital" onclick="document.getElementById('hospital').style.display='block'"><div><i class="material-icons">local_hospital</i><span>Health</span></div></button>
@@ -153,7 +153,7 @@
 	<div id="buy_modal" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 			<header class="w3-container w3-theme">
-				<span onclick="document.getElementById('buy_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<!-- <span onclick="document.getElementById('buy_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 				<h2>Buy</h2>
 			</header>
 			<div class="w3-cell-row w3-padding w3-theme">
@@ -180,7 +180,7 @@
 	<div id="sell_modal" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 			<header class="w3-container w3-theme">
-				<span onclick="document.getElementById('sell_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<!-- <span onclick="document.getElementById('sell_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 				<h2>Sell</h2>
 			</header>
 			<div class="w3-cell-row w3-padding w3-theme">
@@ -196,9 +196,9 @@
 			</div>
 
 			<footer class="w3-container w3-theme w3-padding">
-				<button class="w3-button w3-padding-small w3-white w3-border sell-max">Max</button>
-				<button class="w3-button w3-padding-small w3-white w3-border exit-sell" onclick="document.getElementById('sell_modal').style.display='none'">Sell</button>
-				<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('sell_modal').style.display='none'">Close</button>
+				<button class="w3-button sell-max">Max</button>
+				<button class="w3-button exit-sell" onclick="document.getElementById('sell_modal').style.display='none'">Sell</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('sell_modal').style.display='none'">Close</button>
 			</footer>
 		</div>
 	</div>
@@ -284,7 +284,7 @@
 		<div id="shark" class="w3-modal">
 			<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 				<header class="w3-container w3-theme">
-					<span onclick="document.getElementById('shark').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+					<!-- <span onclick="document.getElementById('shark').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 					<h2>Shark</h2>
 				</header>
 				<div class="w3-cell-row w3-padding w3-theme">
@@ -295,7 +295,7 @@
 						<p class="subtotal-sell">$0</p>
 					</div> -->
 					<div class="w3-container">
-						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+						<p><input class="w3-block" type="number" name="quantity" min="1"></p>
 					</div>
 				</div>
 		
@@ -322,7 +322,7 @@
 						<p class="bank-transaction">$0</p>
 					</div> -->
 					<div class="w3-container">
-						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+						<p><input class="w3-block" type="number" name="quantity" min="1"></p>
 					</div>
 				</div>
 		
@@ -373,7 +373,7 @@
 						<p class="subtotal-hospital">$0</p>
 					</div>
 					<div class="w3-container">
-						<p><input class="w3-block" type="number" name="quantity" min="1" max="5"></p>
+						<p><input class="w3-block" type="number" name="quantity" min="1"></p>
 					</div>
 				</div>
 		
@@ -389,7 +389,7 @@
 	<div id="deal_modal" class="w3-modal">
 		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 			<header class="w3-container w3-theme">
-				<span onclick="document.getElementById('deal_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span>
+				<!-- <span onclick="document.getElementById('deal_modal').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
 				<h2>Deal</h2>
 			</header>
 			<ul class="w3-ul w3-container w3-theme">
@@ -400,7 +400,7 @@
 			
 			</ul>
 			<footer class="w3-container w3-theme w3-padding">
-				<button class="w3-button w3-padding-small w3-right w3-white w3-border" onclick="document.getElementById('deal_modal').style.display='none'">Close</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('deal_modal').style.display='none'">Close</button>
 			</footer>
 		</div>
 	</div>
@@ -410,7 +410,7 @@
 		<div class="w3-modal-content w3-card-4 w3-animate-opacity">
 			<header class="w3-container w3-theme">
 				<!-- <span onclick="document.getElementById('inventory').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
-				<h2>Inventory</h2>
+				<h2>Stock</h2>
 			</header>
 			<ul class="w3-ul w3-theme w3-container" id="inventory_list">
 				<li class="w3-bar w3-button drug" id="acid">

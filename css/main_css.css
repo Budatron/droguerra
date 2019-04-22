@@ -66,10 +66,10 @@ footer button div{
   display: grid;
 }
 footer button i{
-  font-size: 30px;
+  font-size: 28px;
 }
 footer button span{
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .calendar{
@@ -109,6 +109,11 @@ footer button span{
   /* border: #ddd solid; */
 }
 
-#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button {
+#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button, #deal_modal footer button, #sell_modal footer button, #buy_modal footer button {
   text-transform: uppercase;
+}
+
+.w3-block {
+  width: 50%;
+  margin: 0 auto;
 }
