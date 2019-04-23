@@ -158,6 +158,7 @@
         this.can_buy = 0;
         this.can_sell = 0;
         this.price_list;
+        this.hospital_check = 0;
     }
 
     /* Game Data */
@@ -186,10 +187,6 @@
     sanAntonio: sanAntonio,
     miami: miami
     };
-
-
-
-
 
     function refresh_view() {
         /* status bar */
@@ -236,18 +233,83 @@
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
         msg_1();
-        msg_2();
+        // msg_2();
         refresh_view();
     
     }
 
     function msg_1(){
-
+        var random_daily = Math.floor(Math.random() * 11);
+        if(random_daily > 5){
+            daily_msg(player, msg_list);
+            $('#msg').show();
+        }else{
+            msg_2();
+        }
     }
 
     function msg_2(){
+        var rnd = Math.floor(Math.random() * 11);
+        console.log(rnd)
+        if(rnd > 5){
+            var random_daily = Math.floor(Math.random() * 11);
+            if(random_daily > 5){
+                fight(player);
+                $('#fight').show();
+            }else{
+                stuff_to_buy(player)
+                $('#stuff').show();
+            }
+        }
         
     }
+
+
+    function daily_msg(player, msg) {
+       
+        var n = msg.length
+        var random_item = Math.floor(Math.random() * n);
+        var item = msg[random_item]
+        console.log(item)
+        $('#msg .message-text').text(item.text);
+        if(item.item == "health"){player.health = player.health - item.amount;}
+        else if(item.item == 'money'){player.money = player.money + item.amount;}
+        else{ 
+            player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
+            player.space = parseInt(player.space) - parseInt(item.amount);
+        }
+    }
+
+    function fight(player) {
+       
+        // var n = msg.length
+        // var random_item = Math.floor(Math.random() * n);
+        // var item = msg[random_item]
+        // console.log(item)
+        // $('#msg .message-text').text(item.text);
+        // if(item.item == "health"){player.health = player.health - item.amount;}
+        // else if(item.item == 'money'){player.money = player.money + item.amount;}
+        // else{ 
+        //     player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
+        //     player.space = parseInt(player.space) - parseInt(item.amount);
+        // }
+    }
+
+    function stuff_to_buy(player) {
+       
+        // var n = msg.length
+        // var random_item = Math.floor(Math.random() * n);
+        // var item = msg[random_item]
+        // console.log(item)
+        // $('#msg .message-text').text(item.text);
+        // if(item.item == "health"){player.health = player.health - item.amount;}
+        // else if(item.item == 'money'){player.money = player.money + item.amount;}
+        // else{ 
+        //     player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
+        //     player.space = parseInt(player.space) - parseInt(item.amount);
+        // }
+    }
+
     function deal_item(item) {
         $('#deal_modal').css('display', 'block')
         $("#deal_modal header h2").text(item).css('textTransform', 'capitalize');
@@ -306,7 +368,7 @@
     }
 
     function sell_info(item) {
-            price = supply.price_list[supply.current_item];
+            var price = supply.price_list[supply.current_item];
             supply.current_price = item * price;
             supply.can_sell = player.inventory[supply.current_item];
             refresh_view();
@@ -365,6 +427,17 @@
         }
     }
 
+    function pay_hospital(){
+        if(player.health == 100)return;
+ 
+        if($("#hospital input").val() == supply.hospital_check){
+            player.money = parseInt(player.money) - parseInt($("#hospital input").val());
+            player.health = 100;
+            refresh_view();
+        }else {
+            alert("I'AM AFRAID YOUR CREDIT IS ALSO UNHEALTHY");
+        }
+    }
     // function submit_loan_shark_request() {
     //     deposit = parseInt($("#loan_shark_deposit").attr("value"));
     //     withdraw = parseInt($("#loan_shark_withdraw").attr("value"));
@@ -493,40 +566,43 @@
         });
 
 
-        $("#bank_modal .save-money").on('click', function(i) {
+        $("#bank_modal .save-money").on('click', function() {
         bank_save();
         });
 
-        $("#bank_modal .withdraw-money").on('click', function(i) {
+        $("#bank_modal .withdraw-money").on('click', function() {
             bank_withdraw();
         });
 
-        $(".button-bank").on('click', function(i) {
+        $(".button-bank").on('click', function() {
             $("#bank_modal input").val(1)
         }); 
 
-        $(".button-hospital").on('click', function(i) {
-            $("#hospital input").val(1)
+        $(".button-hospital").on('click', function() {
+            supply.hospital_check = Math.floor(Math.random() * 20000) + 100;
+            console.log('<<<<', supply.hospital_check)
+            $("#hospital .subtotal-hospital").text('$' + supply.hospital_check);
+            $("#hospital input").val(1);
         }); 
 
-        $(".button-shark").on('click', function(i) {
-            $("#shark input").val(1)
+        $(".button-shark").on('click', function() {
+            $("#shark input").val(1);
         }); 
 
-        $("#shark .pay-loan").on('click', function(i) {
+        $("#shark .pay-loan").on('click', function() {
             shark_pay();
         });
     
-        $("#shark .loan").on('click', function(i) {
+        $("#shark .loan").on('click', function() {
             shark_loan();
         });
 
-        $("#menu button").each(function(i) {
-        
+        $("#msg button").on('click', function(i) {
+            msg_2();
         });
 
-        $("#hospital button").each(function(i) {
-        
+        $("#hospital .pay_check").on('click', function(i) {
+            pay_hospital()
         });
 
         $("#stuff button").each(function(i) {
@@ -547,6 +623,29 @@
         refresh_view();
 
     });
+
+    var msg_list = [
+        {
+            text: 'You find a dead body with $100',
+            item: 'money',
+            amount: 100,
+        },
+        {
+            text: 'Stranger said: Police is following you',
+            item: '',
+            amount: 0,
+        },
+        {
+            text: 'You have sex with a hooker last night, better check in your pipi',
+            item: 'health',
+            amount: 30,
+        },
+        {
+            text: 'You found 5 bags of cocaine in a bar bathroom',
+            item: 'cocain',
+            amount: 10,
+        },
+    ]
 
 }
 
