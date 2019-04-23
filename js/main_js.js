@@ -137,6 +137,7 @@
         this.max_items = 30;
         this.space = 30;
         this.bank = 0;
+        this.health = 100;
 
         this.advance_day = function () {
             if (this.days_left > 0) {
@@ -197,6 +198,8 @@
         $("#days_left").text(player.days_left);
         $("#bank").text(player.bank);
         $("#debt").text(player.debt);
+        $(".progress-bar-2").css('width', player.health + '%');
+        $(".progress-bar-2").text(player.health + '%');
 
         /* inventory box */
         $("#price_list .drug").each(function() {
@@ -218,7 +221,7 @@
 
     function move_to(place) {
         player.advance_day();
-        place = location_map[place];
+        var place = location_map[place];
         supply.price_list = place.get_price_list();
         // player.price_list = price_list;
 
@@ -232,10 +235,19 @@
         if(place.name == 'Miami') $('.button-bank').show();
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
+        msg_1();
+        msg_2();
         refresh_view();
     
     }
 
+    function msg_1(){
+
+    }
+
+    function msg_2(){
+        
+    }
     function deal_item(item) {
         $('#deal_modal').css('display', 'block')
         $("#deal_modal header h2").text(item).css('textTransform', 'capitalize');
@@ -243,7 +255,7 @@
     }
 
     function buy_verify(){
-        price = supply.price_list[supply.current_item];
+        var price = supply.price_list[supply.current_item];
         if(price < player.money){
             $('#deal_modal').css("display", "none");
             $('#buy_modal').css('display', 'block');
@@ -256,7 +268,7 @@
 
     function buy_info(item) {
         // if (supply.current_item in price_list) { //this will just straight up crash, meh.
-            price = supply.price_list[supply.current_item];
+            var price = supply.price_list[supply.current_item];
             // player.max_items = Math.floor(player.money / price);
             var max_items = Math.floor(player.money / price);
             supply.can_buy = max_items;

@@ -24,13 +24,20 @@ h2 {
   
 }
 
+.health-bar {
+  display: grid;
+  grid-template-columns: 80px auto;
+}
 .progress-bar-1{
   margin-top: 4px;
+  border-radius: 5px;
 }
 
 .progress-bar-2 {
   font-size: 0.7em;
+  border-radius: 5px;
 }
+
 
 /* fallback */
 @font-face {
