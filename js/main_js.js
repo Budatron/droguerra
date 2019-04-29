@@ -138,6 +138,11 @@
         this.space = 30;
         this.bank = 0;
         this.health = 100;
+        this.bitches = 0;
+        this.guns = 0;
+        this.police = 0;
+        this.police_limit = 0;
+        this.fight_turn = 1; 
 
         this.advance_day = function () {
             if (this.days_left > 0) {
@@ -159,6 +164,7 @@
         this.can_sell = 0;
         this.price_list;
         this.hospital_check = 0;
+        this.current_stuff;
     }
 
     /* Game Data */
@@ -205,15 +211,16 @@
         $("#inventory_list .drug").each(function() {
             $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
         });
-        // $("#buy_modal input").attr('placeholder', supply.can_buy)
-    // console.log(supply.current_price)
+   
         $("#buy_modal input").attr('max', supply.can_buy)
         $("#sell_modal input").attr('max', supply.can_sell)
         $('.buy-modal').text(supply.current_item).css('text-transform', 'capitalize');
         $("#buy_modal .subtotal").text( '$' + supply.current_price);
         $("#sell_modal .subtotal").text( '$' + supply.current_price);
         $('.sell-modal').text(supply.current_item);
-        $('#space').text(player.space)
+        $('#space').text(player.space);
+        $('#guns').text(player.guns);
+        $('#bitches').text(player.bitches);
     }
 
     function move_to(place) {
@@ -232,10 +239,9 @@
         if(place.name == 'Miami') $('.button-bank').show();
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
-        msg_1();
-        // msg_2();
+        // msg_1();
+        pre_fight();
         refresh_view();
-    
     }
 
     function msg_1(){
@@ -250,14 +256,12 @@
 
     function msg_2(){
         var rnd = Math.floor(Math.random() * 11);
-        console.log(rnd)
         if(rnd > 5){
             var random_daily = Math.floor(Math.random() * 11);
             if(random_daily > 5){
-                fight(player);
-                $('#fight').show();
+                pre_fight()
             }else{
-                stuff_to_buy(player)
+                stuff_to_buy(stuff_list)
                 $('#stuff').show();
             }
         }
@@ -270,7 +274,6 @@
         var n = msg.length
         var random_item = Math.floor(Math.random() * n);
         var item = msg[random_item]
-        console.log(item)
         $('#msg .message-text').text(item.text);
         if(item.item == "health"){player.health = player.health - item.amount;}
         else if(item.item == 'money'){player.money = player.money + item.amount;}
@@ -278,36 +281,101 @@
             player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
             player.space = parseInt(player.space) - parseInt(item.amount);
         }
+        refresh_view();
     }
 
-    function fight(player) {
-       
-        // var n = msg.length
-        // var random_item = Math.floor(Math.random() * n);
-        // var item = msg[random_item]
-        // console.log(item)
-        // $('#msg .message-text').text(item.text);
-        // if(item.item == "health"){player.health = player.health - item.amount;}
-        // else if(item.item == 'money'){player.money = player.money + item.amount;}
-        // else{ 
-        //     player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
-        //     player.space = parseInt(player.space) - parseInt(item.amount);
-        // }
+    function pre_fight(){
+        player.police = 1
+        $('.fight-text').text('Police find you');
+        $('#fight .fight').show();
+        $('#fight .run').show();
+        $('#fight .surrender').show();
+        $('#fight').show();
+        $('#fight .go').hide();
     }
 
-    function stuff_to_buy(player) {
+    function fight() {
+        console.log(player.police)
+        if(player.police == 0){
+            $('.fight-text').text('Now is safe to go');
+            $('#fight .go').show();
+            $('#fight .fight').hide();
+            $('#fight .run').hide();
+            $('#fight .surrender').hide();
+            refresh_view();
+        } else {
+            if(player.fight_turn){
+                var random_shoot = Math.floor(Math.random() * 2);
+                if(random_shoot){
+                    $('.fight-text').text('You kill one police');
+                    player.police = player.police - 1;
+                } else{
+                    $('.fight-text').text('You miss');
+                }
+                player.fight_turn = 0;
+                fight();
+            } else {
+                var random_shoot = Math.floor(Math.random() * 2);
+                if(random_shoot){
+                    $('.fight-text').text('A shoot gunt has reach you');
+                    player.health = player.health - 15;
+                } else{
+                    $('.fight-text').text('Police shoot but miss');
+                }
+                player.fight_turn = 1;
+                fight();
+            }
+        }
+    }
+
+    function run(){
+        var random_run = Math.floor(Math.random() * 2);
+        if(random_run) {
+            $('.fight-text').text('You scape from the police');
+            $('#fight .go').show();
+            $('#fight .fight').hide();
+            $('#fight .run').hide();
+            $('#fight .surrender').hide();
+        } else {
+            fight();
+        }
+    }
+
+    function surrender(){
+        $('.fight-text').text('Police take all your stuff and put you in jail 3 days');
+        player.money = 0;
+        player.days_left = player.days_left - 3;
+        for( var item in player.inventory){
+            player.inventory[item] = 0;
+        }
+        $('#fight .go').show();
+        $('#fight .fight').hide();
+        $('#fight .run').hide();
+        $('#fight .surrender').hide();
+        refresh_view();
+    }
+
+    function stuff_to_buy(stuff) {
        
-        // var n = msg.length
-        // var random_item = Math.floor(Math.random() * n);
-        // var item = msg[random_item]
-        // console.log(item)
-        // $('#msg .message-text').text(item.text);
-        // if(item.item == "health"){player.health = player.health - item.amount;}
-        // else if(item.item == 'money'){player.money = player.money + item.amount;}
-        // else{ 
-        //     player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
-        //     player.space = parseInt(player.space) - parseInt(item.amount);
-        // }
+        var n = stuff.length
+        var random_item = Math.floor(Math.random() * n);
+        var item = stuff[random_item]
+        $('#stuff .buy-stuff-text').text(item.text);
+        supply.current_stuff = item;
+    }
+
+    function buy_stuff() {
+        if(player.money >= supply.current_stuff.cost){
+            console.log(supply.current_stuff)
+            player.money = player.money - supply.current_stuff.cost;
+            if(supply.current_stuff.item == "space"){player.space = player.space + supply.current_stuff.amount;}
+            else if(supply.current_stuff.item == 'guns'){player.guns = player.guns + supply.current_stuff.amount;}
+            else if(supply.current_stuff.item == 'bitches'){ player.bitches = player.bitches + supply.current_stuff.amount;}
+            refresh_view();
+        }else {
+            alert("YOU DON'T HAVE ENOUGHT MONEY");
+        }
+        
     }
 
     function deal_item(item) {
@@ -498,131 +566,138 @@
         $("#game_end").css("display", "block");
     }
 
-    $(document).ready(function () {
+    // $(document).ready(function () {
         //add click stuff to ui
 
         /* adding page buttons */
 
-        $("nav a").each(function (i) {
-            $(this).click(function (eventObject) {
-                render_new_page($(this).attr("id"));
-            });
-            $(this).css("cursor", "pointer");
+    $("nav a").each(function (i) {
+        $(this).click(function (eventObject) {
+            render_new_page($(this).attr("id"));
         });
-
-        /* adding location movement links */
-        $("#locations li a").each(function (i) {
-            $(this).click(function (eventObject) {
-                move_to($(this).attr("id"));
-            });
-        });
-
-        /* adding buy buttons */
-        $("#price_list li").each(function (i) {
-            $(this).click(function (eventObject) {
-                deal_item($(this).attr("id"));
-            });
-        });
-
-        $('#buy_button').on('click', function(){
-            buy_verify();
-        })
-
-        $('.buy-max').on('click', function () {
-            $("#buy_modal input").val(supply.can_buy);
-            buy_info(supply.can_buy);
-        })
-
-        $('.exit-buy').on('click', function () {
-            exit_buy();
-        })
-
-        $('#sell_button').on('click', function () {
-            sell_verify();
-        })
-
-        $('.sell-max').on('click', function () {
-            $("#sell_modal input").val(supply.can_sell);
-            sell_info(supply.can_sell);
-        })
-
-        $('.exit-sell').on('click', function () {
-            exit_sell();
-        })
-
-        $("#buy_modal input").on('input', function () {
-            buy_info($(this).val())          
-        });
-
-        $("#sell_modal input").on('input', function () {
-            sell_info($(this).val())          
-        });
-    
-        $("#jet_modal li button").each(function(i) {
-            $(this).click(function(eventObject) {
-                $("#jet_modal").css("display", "none");
-                move_to($(this).attr("id"))
-            });
-        });
-
-
-        $("#bank_modal .save-money").on('click', function() {
-        bank_save();
-        });
-
-        $("#bank_modal .withdraw-money").on('click', function() {
-            bank_withdraw();
-        });
-
-        $(".button-bank").on('click', function() {
-            $("#bank_modal input").val(1)
-        }); 
-
-        $(".button-hospital").on('click', function() {
-            supply.hospital_check = Math.floor(Math.random() * 20000) + 100;
-            console.log('<<<<', supply.hospital_check)
-            $("#hospital .subtotal-hospital").text('$' + supply.hospital_check);
-            $("#hospital input").val(1);
-        }); 
-
-        $(".button-shark").on('click', function() {
-            $("#shark input").val(1);
-        }); 
-
-        $("#shark .pay-loan").on('click', function() {
-            shark_pay();
-        });
-    
-        $("#shark .loan").on('click', function() {
-            shark_loan();
-        });
-
-        $("#msg button").on('click', function(i) {
-            msg_2();
-        });
-
-        $("#hospital .pay_check").on('click', function(i) {
-            pay_hospital()
-        });
-
-        $("#stuff button").each(function(i) {
-        
-        });
-
-        $("#fight button").each(function(i) {
-        
-        });
-
-        $("#shark button").each(function(i) {
-        
-        });
-
-        $('.bottom-button').hide();
-
-        /* first refresh */
-        refresh_view();
-
+        $(this).css("cursor", "pointer");
     });
+
+    /* adding location movement links */
+    $("#locations li a").each(function (i) {
+        $(this).click(function (eventObject) {
+            move_to($(this).attr("id"));
+        });
+    });
+
+    /* adding buy buttons */
+    $("#price_list li").each(function (i) {
+        $(this).click(function (eventObject) {
+            deal_item($(this).attr("id"));
+        });
+    });
+
+    $('#buy_button').on('click', function(){
+        buy_verify();
+    })
+
+    $('.buy-max').on('click', function () {
+        $("#buy_modal input").val(supply.can_buy);
+        buy_info(supply.can_buy);
+    })
+
+    $('.exit-buy').on('click', function () {
+        exit_buy();
+    })
+
+    $('#sell_button').on('click', function () {
+        sell_verify();
+    })
+
+    $('.sell-max').on('click', function () {
+        $("#sell_modal input").val(supply.can_sell);
+        sell_info(supply.can_sell);
+    })
+
+    $('.exit-sell').on('click', function () {
+        exit_sell();
+    })
+
+    $("#buy_modal input").on('input', function () {
+        buy_info($(this).val())          
+    });
+
+    $("#sell_modal input").on('input', function () {
+        sell_info($(this).val())          
+    });
+
+    $("#jet_modal li button").each(function(i) {
+        $(this).click(function(eventObject) {
+            $("#jet_modal").css("display", "none");
+            move_to($(this).attr("id"))
+        });
+    });
+
+
+    $("#bank_modal .save-money").on('click', function() {
+    bank_save();
+    });
+
+    $("#bank_modal .withdraw-money").on('click', function() {
+        bank_withdraw();
+    });
+
+    $(".button-bank").on('click', function() {
+        $("#bank_modal input").val(1)
+    }); 
+
+    $(".button-hospital").on('click', function() {
+        supply.hospital_check = Math.floor(Math.random() * 20000) + 100;
+        $("#hospital .subtotal-hospital").text('$' + supply.hospital_check);
+        $("#hospital input").val(1);
+    }); 
+
+    $(".button-shark").on('click', function() {
+        $("#shark input").val(1);
+    }); 
+
+    $("#shark .pay-loan").on('click', function() {
+        shark_pay();
+    });
+
+    $("#shark .loan").on('click', function() {
+        shark_loan();
+    });
+
+    $("#msg button").on('click', function() {
+        msg_2();
+    });
+
+    $("#hospital .pay_check").on('click', function() {
+        pay_hospital()
+    });
+
+    $(".buy_stuff").on('click', function() {
+        buy_stuff();
+    });
+
+    $(".fight").on('click', function() {
+        fight();
+    });
+
+    $(".run").on('click', function() {
+        run();
+    });
+
+    $(".surrender").on('click', function() {
+        surrender();
+    });
+
+    $(".go").on('click', function() {
+        $('#fight').hide();
+    });
+
+    $('.bottom-button').hide();
+
+    /* first refresh */
+    refresh_view();
+
+    // });
 
     var msg_list = [
         {
@@ -644,6 +719,27 @@
             text: 'You found 5 bags of cocaine in a bar bathroom',
             item: 'cocain',
             amount: 10,
+        },
+    ]
+
+    var stuff_list = [
+        {
+            text: 'You can buy an exta coat for 200 and have 10 more space',
+            item: 'space',
+            amount: 10,
+            cost: 200,
+        },
+        {
+            text: 'You can buy a gun for 200 ',
+            item: 'guns',
+            amount: 1,
+            cost: 200,
+        },
+        {
+            text: 'You can hire a prostitute to work with you for $200',
+            item: 'bitches',
+            amount: 1,
+            cost: 200,
         },
     ]
 
