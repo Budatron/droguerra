@@ -521,7 +521,7 @@
     }
 
     function shark_pay(){
-        if($("#shark input").val() <= player.money){
+        if($("#shark input").val() <= player.money && $("#shark input").val() <= player.debt){
             player.money = parseInt(player.money) - parseInt($("#shark input").val());
             player.debt = parseInt(player.debt) - parseInt($("#shark input").val());
             refresh_view();
