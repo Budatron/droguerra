@@ -240,8 +240,8 @@
         if(place.name == 'Miami') $('.button-bank').show();
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
-        // msg_1();
-        go_fight();
+        msg_1();
+        // go_fight();
         refresh_view();
     }
 
@@ -339,6 +339,9 @@
                     $('.fight-text').text('A shoot gunt has reach you');
                     player.health = player.health - 15;
                     refresh_view();
+                    if(player.health <= 0){
+                        game_end();
+                    }
                 } else{
                     $('.fight-text').text('Police shoot but miss');
                 }
@@ -415,9 +418,14 @@
     }
 
     function deal_item(item) {
-        $('#deal_modal').css('display', 'block')
-        $("#deal_modal header h2").text(item).css('textTransform', 'capitalize');
-        supply.current_item = item;
+        if(player.days_left != 31){
+            $('#deal_modal').css('display', 'block')
+            $("#deal_modal header h2").text(item).css('textTransform', 'capitalize');
+            supply.current_item = item;
+        } else {
+            alert("FLIGHT SOMEWERE FIRST");
+        }
+        
     }
 
     function buy_verify(){
@@ -449,6 +457,7 @@
 
     function exit_buy(){
         if($("#buy_modal input").val() <= supply.can_buy){
+            var price = supply.price_list[supply.current_item];
             player.money = player.money - ($("#buy_modal input").val() * price);  // pay moneys
             player.inventory[supply.current_item] = parseInt(player.inventory[supply.current_item]) + parseInt($("#buy_modal input").val());  // get items
             player.space = player.space - $("#buy_modal input").val();
@@ -589,17 +598,17 @@
         /* calculate score and display end page */
 
         /* add score info to page */
-        $(".money_end").text(player.money);
-        $(".debt_end").text(player.debt);
+        $(".money_end").text('Money: ' +  player.money);
+        $(".debt_end").text('Debt: ' + player.debt);
         score = player.money - 3 * player.debt;
-        $(".score_end").text(score);
+        $(".score_end").text('Score: ' + score);
         /* conditional coloring of score */
         score_color = (score > 0) ? "green" : "red";
         $(".score_end").css("color", score_color);
 
         /* show game end */
-        $("#game").css("display", "none");
-        $("#game_end").css("display", "block");
+        // $("#game").css("display", "none");
+        $("#game_end").show();
     }
 
     // $(document).ready(function () {
@@ -607,12 +616,12 @@
 
         /* adding page buttons */
 
-    $("nav a").each(function (i) {
-        $(this).click(function (eventObject) {
-            render_new_page($(this).attr("id"));
-        });
-        $(this).css("cursor", "pointer");
-    });
+    // $("nav a").each(function (i) {
+    //     $(this).click(function (eventObject) {
+    //         render_new_page($(this).attr("id"));
+    //     });
+    //     $(this).css("cursor", "pointer");
+    // });
 
     /* adding location movement links */
     $("#locations li a").each(function (i) {
