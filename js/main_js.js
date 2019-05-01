@@ -134,7 +134,7 @@
         this.money = 200;
         this.debt = 200;
         this.daily_interest = 0.1;
-        this.max_items = 30;
+        this.max_space = 30;
         this.space = 30;
         this.bank = 0;
         this.health = 100;
@@ -386,6 +386,7 @@
         for( var item in player.inventory){
             player.inventory[item] = 0;
         }
+        player.space = player.max_space;
         $('#fight .go').show();
         $('#fight .fight').hide();
         $('#fight .pre-fight').hide();
@@ -407,7 +408,10 @@
         if(player.money >= supply.current_stuff.cost){
             console.log(supply.current_stuff)
             player.money = player.money - supply.current_stuff.cost;
-            if(supply.current_stuff.item == "space"){player.space = player.space + supply.current_stuff.amount;}
+            if(supply.current_stuff.item == "space"){
+                player.space = player.space + supply.current_stuff.amount;
+                player.max_space = player.max_space + supply.current_stuff.amount;
+            }
             else if(supply.current_stuff.item == 'guns'){player.guns = player.guns + supply.current_stuff.amount;}
             else if(supply.current_stuff.item == 'bitches'){ player.bitches = player.bitches + supply.current_stuff.amount;}
             refresh_view();
