@@ -203,6 +203,7 @@
         $("#debt").text(player.debt);
         $(".progress-bar-2").css('width', player.health + '%');
         $(".progress-bar-2").text(player.health + '%');
+        $(".health").text(player.health + '%');
 
         /* inventory box */
         $("#price_list .drug").each(function() {
@@ -240,7 +241,7 @@
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
         // msg_1();
-        pre_fight();
+        go_fight();
         refresh_view();
     }
 
@@ -259,7 +260,7 @@
         if(rnd > 5){
             var random_daily = Math.floor(Math.random() * 11);
             if(random_daily > 5){
-                pre_fight()
+                go_fight()
             }else{
                 stuff_to_buy(stuff_list)
                 $('#stuff').show();
@@ -284,28 +285,44 @@
         refresh_view();
     }
 
-    function pre_fight(){
-        player.police = 1
+    function go_fight(){
+        player.police = 1;
         $('.fight-text').text('Police find you');
-        $('#fight .fight').show();
+        $('#fight .fight').hide();
+        $('#fight .pre-fight').show();
         $('#fight .run').show();
         $('#fight .surrender').show();
         $('#fight').show();
         $('#fight .go').hide();
+        console.log('go_fight #cops', player.police)
+    }
+
+    function pre_fight(){
+        console.log('pre_fight #cops', player.police)
+        $('.fight-text').text( player.police + ' police shooting');
+        $('#fight .fight').show();
+        $('#fight .pre-fight').hide();
+        $('#fight .run').show();
+        $('#fight .surrender').show();
+        $('#fight .go').hide();
     }
 
     function fight() {
-        console.log(player.police)
+        console.log('fight #cops', player.police)
+        console.log('fight health', player.health)
         if(player.police == 0){
             $('.fight-text').text('Now is safe to go');
             $('#fight .go').show();
             $('#fight .fight').hide();
+            $('#fight .pre-fight').hide();
             $('#fight .run').hide();
             $('#fight .surrender').hide();
             refresh_view();
         } else {
+            console.log('fight turn', player.fight_turn)
             if(player.fight_turn){
                 var random_shoot = Math.floor(Math.random() * 2);
+                console.log('fight you random_shoot', random_shoot)
                 if(random_shoot){
                     $('.fight-text').text('You kill one police');
                     player.police = player.police - 1;
@@ -313,36 +330,54 @@
                     $('.fight-text').text('You miss');
                 }
                 player.fight_turn = 0;
-                fight();
+                $('#fight .fight').hide();
+                $('#fight .pre-fight').show();
             } else {
                 var random_shoot = Math.floor(Math.random() * 2);
+                console.log('fight police random_shoot', random_shoot)
                 if(random_shoot){
                     $('.fight-text').text('A shoot gunt has reach you');
                     player.health = player.health - 15;
+                    refresh_view();
                 } else{
                     $('.fight-text').text('Police shoot but miss');
                 }
                 player.fight_turn = 1;
-                fight();
+                $('#fight .fight').hide();
+                $('#fight .pre-fight').show();
             }
         }
     }
 
     function run(){
-        var random_run = Math.floor(Math.random() * 2);
-        if(random_run) {
-            $('.fight-text').text('You scape from the police');
+        var random_run = Math.floor(Math.random() * 3);
+        console.log('run', random_run)
+        if(random_run == 0) {
+            $('.fight-text').text('You scape from the cops');
             $('#fight .go').show();
             $('#fight .fight').hide();
+            $('#fight .pre-fight').hide();
             $('#fight .run').hide();
             $('#fight .surrender').hide();
+        } else if(random_run == 1){
+            no_scape();
         } else {
-            fight();
+            surrender();
         }
     }
 
+    function no_scape(){
+        console.log('no scape')
+        $('.fight-text').text('No scape, you have to fight');
+        $('#fight .go').hide();
+        $('#fight .fight').hide();
+        $('#fight .pre-fight').show();
+        $('#fight .run').hide();
+        $('#fight .surrender').hide();
+    }
+
     function surrender(){
-        $('.fight-text').text('Police take all your stuff and put you in jail 3 days');
+        $('.fight-text').text('Police catch you, take all your stuff and put you in jail 3 days');
         player.money = 0;
         player.days_left = player.days_left - 3;
         for( var item in player.inventory){
@@ -350,6 +385,7 @@
         }
         $('#fight .go').show();
         $('#fight .fight').hide();
+        $('#fight .pre-fight').hide();
         $('#fight .run').hide();
         $('#fight .surrender').hide();
         refresh_view();
@@ -678,6 +714,10 @@
 
     $(".fight").on('click', function() {
         fight();
+    });
+
+    $(".pre-fight").on('click', function() {
+        pre_fight();
     });
 
     $(".run").on('click', function() {
