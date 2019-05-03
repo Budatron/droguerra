@@ -184,7 +184,8 @@
         $("#cash").text(player.money);
         $("#days_left").text(player.days_left);
         $("#bank").text(player.bank);
-        $("#debt").text(player.debt);
+        $("#debt").text(player.debt);console.log('debt', player.debt)
+        $(".debt-row").css('color', player.debt ? 'red': 'white');
         $(".progress-bar-2").css('width', player.health + '%');
         $(".progress-bar-2").css('background', healthColor(player.health));
         $(".progress-bar-2").text(player.health + '%');
