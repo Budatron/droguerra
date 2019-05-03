@@ -225,6 +225,7 @@
     }
 
     function move_to(place) {
+        var placeId = place;
         player.advance_day();
         var place = location_map[place];
         supply.price_list = place.get_price_list();
@@ -240,8 +241,11 @@
         if(place.name == 'Miami') $('.button-bank').show();
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
+
+        $('.city').prop( "disabled", false );
+        $('#'+ placeId).prop( "disabled", true );
+
         msg_1();
-        // go_fight();
         refresh_view();
     }
 
@@ -628,11 +632,11 @@
     // });
 
     /* adding location movement links */
-    $("#locations li a").each(function (i) {
-        $(this).click(function (eventObject) {
-            move_to($(this).attr("id"));
-        });
-    });
+    // $("#locations li a").each(function (i) {
+    //     $(this).click(function (eventObject) {
+    //         move_to($(this).attr("id"));
+    //     });
+    // });
 
     /* adding buy buttons */
     $("#price_list li").each(function (i) {
