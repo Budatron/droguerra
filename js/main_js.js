@@ -6,32 +6,6 @@
 
 	myPrefix.init = function() {
 
-    // var totalMoney,
-    //     totalSpace,
-    //     inventory,
-    //     totalHealth,
-    //     acidPrice,
-    //     cocainePrice,
-    //     ecstasyPrice,
-    //     pcpPrice,
-    //     heroinPrice,
-    //     weedPrice,
-    //     speedPrice,
-    //     shroomsPrice;
-
-    // var acid = document.getElementById('acid');
-    // var cocaine = document.getElementById('cocaine');
-    // var ecstasy = document.getElementById('ecstasy');
-    // var pcp = document.getElementById('pcp');
-    // var heroin = document.getElementById('heroin');
-    // var weed = document.getElementById('weed');
-    // var shrooms = document.getElementById('shrooms');
-    // var speed = document.getElementById('speed');
-    // var getPricesButton = document.getElementById('getPrices');
-
-    // function player() {
-    //     totalMoney = 100;
-    // }
 
     function getRandomPrice(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -194,6 +168,16 @@
     miami: miami
     };
 
+    function healthColor(health){
+        var color = 'red';
+        if (health > 66) color = 'green';
+        else if (health > 49) color = '#73d100';
+        else if (health > 33) color = 'orange';
+        else if (health > 16) color = '#ff5400';
+    
+        return color;
+    }
+
     function refresh_view() {
         /* status bar */
         // $("#player_name").text(player.name);
@@ -202,6 +186,7 @@
         $("#bank").text(player.bank);
         $("#debt").text(player.debt);
         $(".progress-bar-2").css('width', player.health + '%');
+        $(".progress-bar-2").css('background', healthColor(player.health));
         $(".progress-bar-2").text(player.health + '%');
         $(".health").text(player.health + '%');
 
@@ -559,48 +544,6 @@
             alert("I'AM AFRAID YOUR CREDIT IS ALSO UNHEALTHY");
         }
     }
-    // function submit_loan_shark_request() {
-    //     deposit = parseInt($("#loan_shark_deposit").attr("value"));
-    //     withdraw = parseInt($("#loan_shark_withdraw").attr("value"));
-
-    //     if (deposit >= 0) {
-    //         player.money = player.money - deposit;
-    //         player.debt = player.debt - deposit;
-    //     }
-    //     else {
-    //         alert(deposit + " is not a number you can deposit with.");
-    //     }
-
-    //     if (withdraw >= 0) {
-    //         player.money = player.money + withdraw;
-    //         player.debt = player.debt + withdraw;
-    //     }
-    //     else {
-    //         alert(withdraw + " is not a number you can withdraw with.");
-    //     }
-
-    //     player.money = player.money < 0 ? 0 : player.money;
-    //     player.debt = player.debt < 0 ? 0 : player.debt;
-
-    //     $("#loan_shark_deposit").attr("value", 0);
-    //     $("#loan_shark_withdraw").attr("value", 0);
-
-    //     refresh_view();
-
-
-    // }
-
-    // function render_new_page(caller_id) {
-    //     /* Turn off the old selected item to turn on the new one*/
-    //     $(".active").removeClass("active");
-    //     $("#" + caller_id).addClass("active");
-
-    //     /* Un-render the current page and render the new one from the
-    //      * caller_id
-    //      */
-    //     $(".current_page").removeClass("current_page");
-    //     $("#" + caller_id + "_page").addClass("current_page");
-    // }
 
     function game_end() {
         /* calculate score and display end page */
