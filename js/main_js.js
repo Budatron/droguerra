@@ -184,7 +184,7 @@
         $("#cash").text(player.money);
         $("#days_left").text(player.days_left);
         $("#bank").text(player.bank);
-        $("#debt").text(player.debt);console.log('debt', player.debt)
+        $("#debt").text(player.debt);
         $(".debt-row").css('color', player.debt ? 'red': 'white');
         $(".progress-bar-2").css('width', player.health + '%');
         $(".progress-bar-2").css('background', healthColor(player.health));
@@ -210,6 +210,14 @@
         $('#bitches').text(player.bitches);
     }
 
+    function drug_ability() {
+        $('.drug').show();
+        $('.drug').each(function(index){
+            var chance = Math.floor(Math.random() * 8);
+            if(!chance)$(this).hide();
+        });
+    }
+
     function move_to(place) {
         var placeId = place;
         player.advance_day();
@@ -231,6 +239,7 @@
         $('.city').prop( "disabled", false );
         $('#'+ placeId).prop( "disabled", true );
 
+        drug_ability();
         msg_1();
         refresh_view();
     }

@@ -104,8 +104,8 @@ footer button span{
   padding: 0px 4px;
 }
 
-#inventory_list {
-  /* margin: 0 16px; */
+#inventory header {
+  /* padding-left: 0 16px; */
 }
 
 .qty{
