@@ -114,6 +114,7 @@
         this.health = 100;
         this.bitches = 0;
         this.guns = 0;
+        this.bullets = 0;
         this.police = 0;
         this.police_limit = 0;
         this.fight_turn = 1; 
@@ -305,7 +306,6 @@
         player.advance_day();
         var place = location_map[place];
         supply.price_list = place.get_price_list();
-        // player.price_list = price_list;
 
         $(".location").text(place.name);
 
@@ -329,8 +329,9 @@
     }
 
     function msg_1(){
-        var random_daily = Math.floor(Math.random() * 11);
-        if(random_daily > 5){
+        // 1 in 3 to get a dayly mesage #1
+        var random_daily = Math.floor(Math.random() * 3);
+        if(!random_daily){
             daily_msg(player, msg_list);
             $('#msg').show();
         }else{
@@ -339,17 +340,20 @@
     }
 
     function msg_2(){
-        var rnd = Math.floor(Math.random() * 11);
-        if(rnd > 5){
-            var random_daily = Math.floor(Math.random() * 11);
-            if(random_daily > 5){
-                go_fight()
-            }else{
+        // 1 in 7 chance to get bust by cops or get offered some stuff
+        var rnd = Math.floor(Math.random() * 7);
+            if(rnd == 0){
+                var drug = 0;
+                for( var item in player.inventory){
+                    drug = drug + player.inventory[item];
+                }
+                // No drugs no bust
+                if(drug) go_fight();
+
+            }else if(rnd == 1){
                 stuff_to_buy(stuff_list)
                 $('#stuff').show();
             }
-        }
-        
     }
 
 
@@ -369,7 +373,7 @@
     }
 
     function go_fight(){
-        player.police = 1;
+        player.police = player.police + 1;
         $('.fight-text').text('Police find you');
         $('#fight .fight').hide();
         $('#fight .pre-fight').show();
@@ -404,19 +408,36 @@
         } else {
             // console.log('fight turn', player.fight_turn)
             if(player.fight_turn){
-                var random_shoot = Math.floor(Math.random() * 2);
-                // console.log('fight you random_shoot', random_shoot)
-                if(random_shoot){
-                    $('.fight-text').text('You kill one police');
-                    player.police = player.police - 1;
-                } else{
-                    $('.fight-text').text('You miss');
+                // No guns you cant fight
+                if(player.guns && player.bullets){
+                    var random_shoot = Math.floor(Math.random() * 4);
+                    // console.log('fight you random_shoot', random_shoot)
+                    if(random_shoot){
+                        $('.fight-text').text('You kill one police');
+                        player.police = player.police - 1;
+                    } else{
+                        $('.fight-text').text('You miss');
+                    }
+
+                    player.bullets = player.bullets - 1;
+                    if(player.bullets <= 30) player.guns = 5;
+                    if(player.bullets <= 24) player.guns = 4;
+                    if(player.bullets <= 18) player.guns = 3;
+                    if(player.bullets <= 12) player.guns = 2;
+                    if(player.bullets <= 6) player.guns = 1;
+                    if(!player.bullets) {
+                        player.guns = 0;
+                        $('.fight-text').text('You are out of bullets');
+                    }
+                    
+                } else {
+                    $('.fight-text').text('You have no guns to fight');
                 }
                 player.fight_turn = 0;
                 $('#fight .fight').hide();
                 $('#fight .pre-fight').show();
             } else {
-                var random_shoot = Math.floor(Math.random() * 2);
+                var random_shoot = Math.floor(Math.random() * 6);
                 // console.log('fight police random_shoot', random_shoot)
                 if(random_shoot){
                     $('.fight-text').text('A shoot gunt has reach you');
@@ -495,7 +516,10 @@
                 player.space = player.space + supply.current_stuff.amount;
                 player.max_space = player.max_space + supply.current_stuff.amount;
             }
-            else if(supply.current_stuff.item == 'guns'){player.guns = player.guns + supply.current_stuff.amount;}
+            else if(supply.current_stuff.item == 'guns'){
+                player.guns = player.guns + supply.current_stuff.amount;
+                player.bullets = player.bullets + 6;
+            }
             else if(supply.current_stuff.item == 'bitches'){ player.bitches = player.bitches + supply.current_stuff.amount;}
             refresh_view();
         }else {
