@@ -114,6 +114,7 @@
         this.health = 100;
         this.bitches = 0;
         this.guns = 0;
+        this.total_guns = 2;
         this.bullets = 0;
         this.police = 0;
         this.police_limit = 0;
@@ -201,6 +202,7 @@
         $("#inventory_list .drug-i").each(function() {
             $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
         });
+        $("#inventory_list #bullet .qty").text(player.bullets);
    
         $("#buy_modal input").attr('max', supply.can_buy)
         $("#sell_modal input").attr('max', supply.can_sell)
@@ -271,6 +273,7 @@
         }
 
         supply.price_list[bust] = new_price;
+        console.log(old_price, new_price);
         return new_price == old_price ? true : false;  
     }
 
@@ -281,10 +284,10 @@
             if(!chance){
                 if(op1){
                     new_price = new_price * bust1 ;
-                    $('#msg .message-text').text('Cops confiscate a shipment of' + bust + ', prices go up');
+                    $('#msg .message-text').text('Cops confiscate a shipment of ' + bust + ', prices go up');
                 }else {
                     new_price = new_price / bust1 ;
-                    $('#msg .message-text').text('The market has been flooded with homemade' + bust + '. Prices have gone down.');
+                    $('#msg .message-text').text('The market has been flooded with homemade ' + bust + '. Prices have gone down.');
                 }
                 
             }
@@ -344,11 +347,15 @@
     function msg_2(){
         // 1 in 7 chance to get bust by cops or get offered some stuff
         var rnd = Math.floor(Math.random() * 7);
-            if(rnd == 0){
+        console.log('msg_2' ,rnd)
+            if(!rnd){
+                console.log('chance to fight')
                 var drug = 0;
                 for( var item in player.inventory){
+                    console.log(player.inventory[item])
                     drug = drug + player.inventory[item];
                 }
+                console.log('you have druges ', drug)
                 // No drugs no bust
                 if(drug) go_fight();
 
@@ -442,9 +449,15 @@
                 var random_shoot = Math.floor(Math.random() * 6);
                 // console.log('fight police random_shoot', random_shoot)
                 if(random_shoot){
-                    $('.fight-text').text('A shoot gunt has reach you');
-                    player.health = player.health - 15;
-                    refresh_view();
+                    if(player.bitches){
+                        bitch_gone();
+                        $('.fight-text').text('Cop kill one of your bitches');
+                    }else{
+                        $('.fight-text').text('A shoot gunt has reach you');
+                        player.health = player.health - 15;
+                        refresh_view();
+                    }
+                    
                     
                 } else{
                     $('.fight-text').text('Police shoot but miss');
@@ -517,15 +530,53 @@
                 player.max_space = player.max_space + supply.current_stuff.amount;
             }
             else if(supply.current_stuff.item == 'guns'){
-                player.guns = player.guns + supply.current_stuff.amount;
-                player.bullets = player.bullets + 6;
+                if(player.total_guns >= player.guns + supply.current_stuff.amount){
+                    player.guns = player.guns + supply.current_stuff.amount;
+                    player.bullets = player.bullets + 6;
+                }else {
+                    alert("YOU DON'T HAVE ENOUGHT SPACE");
+                }
             }
-            else if(supply.current_stuff.item == 'bitches'){ player.bitches = player.bitches + supply.current_stuff.amount;}
+            else if(supply.current_stuff.item == 'bitches'){ 
+                player.bitches = player.bitches + supply.current_stuff.amount;
+                player.total_guns = player.total_guns + 1;
+                player.space = player.space + 10;
+                player.max_space = player.max_space + 10;
+            }
             refresh_view();
         }else {
             alert("YOU DON'T HAVE ENOUGHT MONEY");
         }
         
+    }
+
+    function bitch_gone(){
+        if(player.bitches){
+            player.bitches = player.bitches - 1 ;
+            player.total_guns = player.total_guns - 1;
+            player.bullets = player.bullets - 6;
+            player.space = player.space - 10;
+            player.max_space = player.max_space - 10;
+            player.money = player.money - Math.floor((player.money/10));
+
+            // remove_inventory_items();
+
+            var virtual_space = 10;
+            for( var item in player.inventory){
+                if( player.inventory[item]){
+                    if(virtual_space >= player.inventory[item]){ 
+                        virtual_space = virtual_space - player.inventory[item];
+                        player.space = player.space + player.inventory[item];
+                        player.inventory[item] = 0;
+                    } else {
+                        player.inventory[item] = player.inventory[item] - virtual_space;
+                        player.space = player.space + virtual_space;
+                        virtual_space = 0;
+                    }
+                }
+                
+            }
+        }
     }
 
     function deal_item(item) {
@@ -581,7 +632,7 @@
     }
 
     function sell_verify(){
-        if (player.inventory[supply.current_item]) {
+        if (parseInt(player.inventory[supply.current_item])) {
             $('#deal_modal').css("display", "none");
             $('#sell_modal').css('display', 'block');
             $("#sell_modal input").val(1);
@@ -682,24 +733,7 @@
         $("#game_end").show();
     }
 
-    // $(document).ready(function () {
-        //add click stuff to ui
 
-        /* adding page buttons */
-
-    // $("nav a").each(function (i) {
-    //     $(this).click(function (eventObject) {
-    //         render_new_page($(this).attr("id"));
-    //     });
-    //     $(this).css("cursor", "pointer");
-    // });
-
-    /* adding location movement links */
-    // $("#locations li a").each(function (i) {
-    //     $(this).click(function (eventObject) {
-    //         move_to($(this).attr("id"));
-    //     });
-    // });
 
     /* adding buy buttons */
     $("#price_list li").each(function (i) {
