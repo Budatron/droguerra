@@ -191,7 +191,9 @@
         $(".progress-bar-2").css('background', healthColor(player.health));
         $(".progress-bar-2").text(player.health + '%');
         $(".health").text(player.health + '%');
-
+        if(player.health <= 0){
+            game_end();
+        }
         /* inventory box */
         $("#price_list .drug").each(function() {
             $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
@@ -443,9 +445,7 @@
                     $('.fight-text').text('A shoot gunt has reach you');
                     player.health = player.health - 15;
                     refresh_view();
-                    if(player.health <= 0){
-                        game_end();
-                    }
+                    
                 } else{
                     $('.fight-text').text('Police shoot but miss');
                 }
@@ -667,9 +667,11 @@
         /* calculate score and display end page */
 
         /* add score info to page */
+        var score = 0;
+        var score_color = '';
         $(".money_end").text('Money: ' +  player.money);
         $(".debt_end").text('Debt: ' + player.debt);
-        score = player.money - 3 * player.debt;
+        score = player.money - player.debt;
         $(".score_end").text('Score: ' + score);
         /* conditional coloring of score */
         score_color = (score > 0) ? "green" : "red";
