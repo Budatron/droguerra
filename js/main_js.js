@@ -211,11 +211,93 @@
     }
 
     function drug_ability() {
-        $('.drug').show();
+        $('.drug').show().addClass('active');
         $('.drug').each(function(index){
             var chance = Math.floor(Math.random() * 8);
-            if(!chance)$(this).hide();
+            if(!chance)$(this).hide().removeClass('active');
         });
+    }
+
+    function daily_bust() {
+        var arr = [];
+        $('.drug.active').each(function(index){
+            arr.push($(this).attr('id'));
+        });
+
+        var l = arr.length;
+        var chance = Math.floor(Math.random() * l);
+        var bust = arr[chance];
+        var bust_drop = Math.floor(Math.random() * 2);
+        
+        var old_price = supply.price_list[bust];
+        var new_price = 0;
+        switch(bust){
+            case 'acid':
+                new_price = drop_bust(bust, old_price, bust_drop, 17, 25, 0, 1, 4, 8);
+            break;
+            case 'cocain':
+                new_price = drop_bust(bust, old_price, bust_drop, 35, 35, 1, 1, 4, 8);
+            break;
+            case 'ecstasy':
+                new_price = drop_bust(bust, old_price, bust_drop, 13, 11, 1, 0, 4, 8);
+            break;
+            case 'pcp':
+                new_price = drop_bust(bust, old_price, bust_drop, 20, 20, 1, 1, 4, 8);
+            break;
+            case 'heroin':
+                new_price = drop_bust(bust, old_price, bust_drop, 25, 25, 1, 1, 4, 8);
+            break;
+            case 'weed':
+                new_price = drop_bust(bust, old_price, bust_drop, 13, 10, 1, 0, 4, 4);
+            break;
+            case 'speed':
+                new_price = drop_bust(bust, old_price, bust_drop, 15, 20, 1, 1, 4, 8);
+            break;
+            case 'shrooms':
+                new_price = drop_bust(bust, old_price, bust_drop, 17, 20, 1, 0, 4, 8);
+            break;
+            case 'hashish':
+                new_price = drop_bust(bust, old_price, bust_drop, 13, 25, 1, 0, 4, 4);
+            break;
+            case 'ludes':
+                new_price = drop_bust(bust, old_price, bust_drop, 20, 20, 1, 1, 4, 8);
+            break;
+            case 'peyote':
+                new_price = drop_bust(bust, old_price, bust_drop, 25, 25, 1, 0, 4, 8);
+            break;
+        }
+
+        supply.price_list[bust] = new_price;
+        return new_price == old_price ? true : false;  
+    }
+
+    function drop_bust(bust, price, bust_drop, prob1, prob2, op1, op2, bust1, bust2) {
+        var new_price = price;
+        if(bust_drop) {
+            var chance = Math.floor(Math.random() * prob1);
+            if(!chance){
+                if(op1){
+                    new_price = new_price * bust1 ;
+                    $('#msg .message-text').text('Cops confiscate a shipment of' + bust + ', prices go up');
+                }else {
+                    new_price = new_price / bust1 ;
+                    $('#msg .message-text').text('The market has been flooded with homemade' + bust + '. Prices have gone down.');
+                }
+                
+            }
+        } else {
+            var chance = Math.floor(Math.random() * prob2);
+            if(!chance){
+                if(op2){
+                    new_price = new_price * bust2 ;
+                    $('#msg .message-text').text('Addicts are buying ' + bust + ' at outrageous prices');
+                }else {
+                    new_price = new_price / bust2 ;
+                    $('#msg .message-text').text('At the moment there`s a lot of cheap ' + bust + ' on the streets.');
+                }
+            }
+        }
+        return new_price;
     }
 
     function move_to(place) {
@@ -240,7 +322,9 @@
         $('#'+ placeId).prop( "disabled", true );
 
         drug_ability();
-        msg_1();
+        var msg_bust = daily_bust();
+        if(msg_bust){ msg_1();}
+        else  {$('#msg').show();}
         refresh_view();
     }
 
@@ -293,11 +377,11 @@
         $('#fight .surrender').show();
         $('#fight').show();
         $('#fight .go').hide();
-        console.log('go_fight #cops', player.police)
+        // console.log('go_fight #cops', player.police)
     }
 
     function pre_fight(){
-        console.log('pre_fight #cops', player.police)
+        // console.log('pre_fight #cops', player.police)
         $('.fight-text').text( player.police + ' police shooting');
         $('#fight .fight').show();
         $('#fight .pre-fight').hide();
@@ -307,8 +391,8 @@
     }
 
     function fight() {
-        console.log('fight #cops', player.police)
-        console.log('fight health', player.health)
+        // console.log('fight #cops', player.police)
+        // console.log('fight health', player.health)
         if(player.police == 0){
             $('.fight-text').text('Now is safe to go');
             $('#fight .go').show();
@@ -318,10 +402,10 @@
             $('#fight .surrender').hide();
             refresh_view();
         } else {
-            console.log('fight turn', player.fight_turn)
+            // console.log('fight turn', player.fight_turn)
             if(player.fight_turn){
                 var random_shoot = Math.floor(Math.random() * 2);
-                console.log('fight you random_shoot', random_shoot)
+                // console.log('fight you random_shoot', random_shoot)
                 if(random_shoot){
                     $('.fight-text').text('You kill one police');
                     player.police = player.police - 1;
@@ -333,7 +417,7 @@
                 $('#fight .pre-fight').show();
             } else {
                 var random_shoot = Math.floor(Math.random() * 2);
-                console.log('fight police random_shoot', random_shoot)
+                // console.log('fight police random_shoot', random_shoot)
                 if(random_shoot){
                     $('.fight-text').text('A shoot gunt has reach you');
                     player.health = player.health - 15;
@@ -353,7 +437,7 @@
 
     function run(){
         var random_run = Math.floor(Math.random() * 3);
-        console.log('run', random_run)
+        // console.log('run', random_run)
         if(random_run == 0) {
             $('.fight-text').text('You scape from the cops');
             $('#fight .go').show();
@@ -711,24 +795,34 @@
 
     var msg_list = [
         {
-            text: 'You find a dead body with $100',
+            text: 'You find a dead body with $100.',
             item: 'money',
             amount: 100,
         },
         {
-            text: 'Stranger said: Police is following you',
+            text: 'Stranger said: Police is following you.',
             item: '',
             amount: 0,
         },
         {
-            text: 'You have sex with a hooker last night, better check in your pipi',
+            text: 'You have sex with a hooker last night, better check in your pipi.',
             item: 'health',
             amount: 30,
         },
         {
-            text: 'You found 5 bags of cocaine in a bar bathroom',
+            text: 'You found 5 bags of cocaine in a bar bathroom.',
             item: 'cocain',
             amount: 10,
+        },
+        {
+            text: 'Sometimes I feel like someone`s playing my life on a phone game in the bathroom.',
+            item: '',
+            amount: 0,
+        },
+        {
+            text: 'A stranger yells at you from across the street: Who needs graphics!?',
+            item: '',
+            amount: 0,
         },
     ]
 
