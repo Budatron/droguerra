@@ -194,9 +194,9 @@
 
         /* inventory box */
         $("#price_list .drug").each(function() {
-        $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
+            $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
         });
-        $("#inventory_list .drug").each(function() {
+        $("#inventory_list .drug-i").each(function() {
             $(this).find('.qty').text(player.inventory[$(this).attr("id")]);
         });
    
@@ -457,19 +457,19 @@
     }
 
     function run(){
-        var random_run = Math.floor(Math.random() * 3);
+        var random_run = Math.floor(Math.random() * 15);
         // console.log('run', random_run)
-        if(random_run == 0) {
+        if(!random_run) {
+            surrender();
+        } else if(random_run == 1 || random_run == 2){
+            no_scape();
+        } else {
             $('.fight-text').text('You scape from the cops');
             $('#fight .go').show();
             $('#fight .fight').hide();
             $('#fight .pre-fight').hide();
             $('#fight .run').hide();
             $('#fight .surrender').hide();
-        } else if(random_run == 1){
-            no_scape();
-        } else {
-            surrender();
         }
     }
 
@@ -845,6 +845,16 @@
         },
         {
             text: 'A stranger yells at you from across the street: Who needs graphics!?',
+            item: '',
+            amount: 0,
+        },
+        {
+            text: 'Konk the door three times at Brooklin, may seve you.',
+            item: '',
+            amount: 0,
+        },
+        {
+            text: 'The DEA suspects large bank accounts. Be careful.',
             item: '',
             amount: 0,
         },
