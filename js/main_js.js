@@ -274,7 +274,7 @@
         }
 
         supply.price_list[bust] = new_price;
-        console.log(old_price, new_price);
+        console.log('old', old_price, 'new', new_price);
         return new_price == old_price ? true : false;  
     }
 
@@ -304,7 +304,7 @@
                 }
             }
         }
-        return new_price;
+        return Math.floor(new_price);
     }
 
     function move_to(place) {
@@ -314,10 +314,6 @@
         supply.price_list = place.get_price_list();
 
         $(".location").text(place.name);
-
-        $("#price_list .drug").each(function () {
-            $(this).find('.price').text('$' + supply.price_list[$(this).attr("id")]);
-        });
 
         $('.bottom-button').hide();
         if(place.name == 'Miami') $('.button-bank').show();
@@ -335,6 +331,11 @@
         var msg_bust = daily_bust();
         if(msg_bust){ msg_1();}
         else  {$('#msg').show();}
+
+        $("#price_list .drug").each(function () {
+            $(this).find('.price').text('$' + supply.price_list[$(this).attr("id")]);
+        });
+
         refresh_view();
     }
 
@@ -356,11 +357,11 @@
             if(!rnd){
                 console.log('chance to fight')
                 var drug = 0;
-                for( var item in player.inventory){
-                    console.log(player.inventory[item])
-                    drug = drug + player.inventory[item];
+                
+                
+                for( const item in player.inventory){
+                    drug = drug + parseInt(player.inventory[item]);
                 }
-                console.log('you have druges ', drug)
                 // No drugs no bust
                 if(drug) go_fight();
 
@@ -380,7 +381,7 @@
         $('#msg .message-text').text(item.text);
         if(item.item == "health"){player.health = player.health - item.amount;}
         else if(item.item == 'money'){player.money = player.money + item.amount;}
-        else{ 
+        else if(item.item != ''){
             player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
             player.space = parseInt(player.space) - parseInt(item.amount);
         }
