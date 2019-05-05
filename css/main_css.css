@@ -119,7 +119,7 @@ footer button span{
   /* border: #ddd solid; */
 }
 
-#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button, #deal_modal footer button, #sell_modal footer button, #buy_modal footer button {
+#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button, #deal_modal footer button, #sell_modal footer button, #buy_modal footer button, #game_end footer button {
   text-transform: uppercase;
 }
 

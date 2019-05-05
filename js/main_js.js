@@ -90,7 +90,7 @@
 
 
     function Player_Object() {
-        this.days_left = 31;
+        this.days_left = 1;
         this.name = "Conrad";
         this.inventory = { 
             acid: 0,
@@ -188,7 +188,7 @@
         $("#days_left").text(player.days_left);
         $("#bank").text(player.bank);
         $("#debt").text(player.debt);
-        $(".debt-row").css('color', player.debt ? 'red': 'white');
+        $(".debt-row").css('color', player.debt ? '#ffb9b9': 'white');
         $(".progress-bar-2").css('width', player.health + '%');
         $(".progress-bar-2").css('background', healthColor(player.health));
         $(".progress-bar-2").text(player.health + '%');
@@ -733,7 +733,7 @@
         score = player.money - player.debt;
         $(".score_end").text('Score: ' + score);
         /* conditional coloring of score */
-        score_color = (score > 0) ? "green" : "red";
+        score_color = (score > 0) ? "green" : "#ffb9b9";
         $(".score_end").css("color", score_color);
 
         /* show game end */
