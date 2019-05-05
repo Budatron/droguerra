@@ -141,6 +141,7 @@
         this.price_list;
         this.hospital_check = 0;
         this.current_stuff;
+        this.current_knok = 3;
     }
 
     /* Game Data */
@@ -322,6 +323,10 @@
         if(place.name == 'Miami') $('.button-bank').show();
         if(place.name == 'Bronx') $('.button-shark').show();
         if(place.name == 'San Antonio') $('.button-hospital').show();
+        if(place.name == 'Brooklyn') {
+            supply.current_knok = 3;
+            $('.button-gun').show();
+        }
 
         $('.city').prop( "disabled", false );
         $('#'+ placeId).prop( "disabled", true );
@@ -360,7 +365,8 @@
                 if(drug) go_fight();
 
             }else if(rnd == 1){
-                stuff_to_buy(stuff_list)
+                $('#stuff h2').text('This may interest you.')
+                stuff_to_buy(stuff_list);
                 $('#stuff').show();
             }
     }
@@ -504,6 +510,8 @@
             player.inventory[item] = 0;
         }
         player.space = player.max_space;
+        player.guns = 0;
+        player.bullets = 0;
         $('#fight .go').show();
         $('#fight .fight').hide();
         $('#fight .pre-fight').hide();
@@ -573,8 +581,7 @@
                         player.space = player.space + virtual_space;
                         virtual_space = 0;
                     }
-                }
-                
+                } 
             }
         }
     }
@@ -846,6 +853,16 @@
         $('#fight').hide();
     });
 
+    $(".button-gun").on('click', function() {
+        supply.current_knok--;
+        if(!supply.current_knok) {
+            stuff_to_buy(stuff_list);
+            $('#stuff').show();
+            supply.current_knok = -1;
+            $('#stuff h2').text("Shhhh, don't tell anybody!");
+        }
+    });
+    
     $('.bottom-button').hide();
 
     /* first refresh */
@@ -898,19 +915,19 @@
 
     var stuff_list = [
         {
-            text: 'You can buy an exta coat for 200 and have 10 more space',
+            text: 'You can buy an exta coat for $200 and have 10 more space.',
             item: 'space',
             amount: 10,
             cost: 200,
         },
         {
-            text: 'You can buy a gun for 200 ',
+            text: 'You can buy a gun for $200.',
             item: 'guns',
             amount: 1,
             cost: 200,
         },
         {
-            text: 'You can hire a prostitute to work with you for $200',
+            text: 'You can hire a prostitute to work with you for $200.',
             item: 'bitches',
             amount: 1,
             cost: 200,
