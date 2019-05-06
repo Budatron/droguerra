@@ -498,11 +498,11 @@
     }
 
     function run(){
-        var random_run = Math.floor(Math.random() * 15);
+        var random_run = Math.floor(Math.random() * 10);
         // console.log('run', random_run)
         if(!random_run) {
             surrender();
-        } else if(random_run == 1 || random_run == 2){
+        } else if(random_run == 1 || random_run == 2  || random_run == 3 ){
             no_scape();
         } else {
             $('.fight-text').text('You scape from the cops');
@@ -511,6 +511,7 @@
             $('#fight .pre-fight').hide();
             $('#fight .run').hide();
             $('#fight .surrender').hide();
+            refresh_view();
         }
     }
 
@@ -584,11 +585,13 @@
         if(player.bitches){
             player.bitches = player.bitches - 1 ;
             player.total_guns = player.total_guns - 1;
-            player.bullets = player.bullets - 6;
-            player.space = player.space - 10;
+            if(player.guns > 2){
+                player.guns = player.guns - 1;
+                player.bullets = player.bullets - 6;
+            }
+            player.money = player.money - Math.floor((player.money * 0.20));
             player.max_space = player.max_space - 10;
-            player.money = player.money - Math.floor((player.money/10));
-
+            player.space = player.space - 10;
             // remove_inventory_items();
 
             var virtual_space = 10;
@@ -606,6 +609,7 @@
                 } 
             }
         }
+        refresh_view();
     }
 
     function deal_item(item) {
