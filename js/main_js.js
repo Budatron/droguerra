@@ -188,7 +188,7 @@
         $("#days_left").text(player.days_left);
         $("#bank").text(player.bank);
         $("#debt").text(player.debt);
-        $(".debt-row").css('color', player.debt ? '#ff9d9d': 'white');
+        $(".debt-row").css('color', player.debt ? 'red': 'white');
         $(".progress-bar-2").css('width', player.health + '%');
         $(".progress-bar-2").css('background', healthColor(player.health));
         $(".progress-bar-2").text(player.health + '%');
@@ -758,7 +758,7 @@
         score = player.money - player.debt;
         $(".score_end").text('Score: ' + score);
         /* conditional coloring of score */
-        score_color = (score > 0) ? "green" : "#ff9d9d";
+        score_color = (score > 0) ? "green" : "red";
         $(".score_end").css("color", score_color);
 
         /* show game end */
