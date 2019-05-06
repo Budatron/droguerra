@@ -381,6 +381,27 @@
         $('#msg .message-text').text(item.text);
         if(item.item == "health"){player.health = player.health - item.amount;}
         else if(item.item == 'money'){player.money = player.money + item.amount;}
+        else if(item.item == 'dea'){
+            if(player.bank > 1000000) player.bank = 0;
+            $('#msg .message-text').text('The DEA confiscated your bank account.');
+        }
+        else if(item.item == 'shark'){
+            if(player.debt > 100000) {
+                if(player.debt > player.money){
+                    player.money = 0;
+                    player.health = 0;
+                    player.debt = player.debt - player.money;
+                }else {
+                    player.money = 0;
+                    player.health = player.health - 25;
+                }   
+            }
+            $('#msg .message-text').text("I'm going to take this money as payment for the inconvenience. Keep my knife as a gift.");
+        }
+        else if(item.item == 'bitch'){
+            if(player.bitches > 3) bitch_gone();
+            $('#msg .message-text').text('A bitch just left you. She take money and drugs.');
+        }
         else if(item.item != ''){
             player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
             player.space = parseInt(player.space) - parseInt(item.amount);
@@ -909,7 +930,17 @@
         },
         {
             text: 'The DEA suspects large bank accounts. Be careful.',
-            item: '',
+            item: 'dea',
+            amount: 0,
+        },
+        {
+            text: "Sharks don't like to be taken for fools.",
+            item: 'shark',
+            amount: 0,
+        },
+        {
+            text: "Bitches run easy if they are to many.",
+            item: 'bitch',
             amount: 0,
         },
     ]
