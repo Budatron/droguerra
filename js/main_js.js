@@ -382,8 +382,10 @@
         if(item.item == "health"){player.health = player.health - item.amount;}
         else if(item.item == 'money'){player.money = player.money + item.amount;}
         else if(item.item == 'dea'){
-            if(player.bank > 1000000) player.bank = 0;
-            $('#msg .message-text').text('The DEA confiscated your bank account.');
+            if(player.bank > 1000000) {
+                player.bank = 0;
+                $('#msg .message-text').text('The DEA confiscated your bank account.');
+            }
         }
         else if(item.item == 'shark'){
             if(player.debt > 100000) {
@@ -394,13 +396,16 @@
                 }else {
                     player.money = 0;
                     player.health = player.health - 25;
-                }   
+                }  
+                $('#msg .message-text').text("I'm going to take this money as payment for the inconvenience. Keep my knife as a gift."); 
             }
-            $('#msg .message-text').text("I'm going to take this money as payment for the inconvenience. Keep my knife as a gift.");
+            
         }
         else if(item.item == 'bitch'){
-            if(player.bitches > 3) bitch_gone();
-            $('#msg .message-text').text('A bitch just left you. She take money and drugs.');
+            if(player.bitches > 3) {
+                bitch_gone();
+                $('#msg .message-text').text('A bitch just left you. She take money and drugs.');
+            }
         }
         else if(item.item != ''){
             player.inventory[item.item] = parseInt(player.inventory[item.item]) + parseInt(item.amount);
@@ -913,9 +918,29 @@
             amount: 30,
         },
         {
-            text: 'You found 5 bags of cocaine in a bar bathroom.',
+            text: 'You found 2 bags of cocaine in a bar bathroom.',
             item: 'cocain',
-            amount: 10,
+            amount: 2,
+        },
+        {
+            text: 'A friend gave you some weed he had left over.',
+            item: 'weed',
+            amount: 3,
+        },
+        {
+            text: 'You finded a dead body in the valley with PCP.',
+            item: 'pcp',
+            amount: 3,
+        },
+        {
+            text: 'You just swindled a drunk and stole his speed.',
+            item: 'speed',
+            amount: 3,
+        },
+        {
+            text: 'An old woman says: you look like a film artist.',
+            item: '',
+            amount: 0,
         },
         {
             text: 'Sometimes I feel like someone`s playing my life on a phone game in the bathroom.',
@@ -951,22 +976,22 @@
 
     var stuff_list = [
         {
-            text: 'You can buy an exta coat for $200 and have 10 more space.',
+            text: 'You can buy an exta coat for $200 and have 5 more space.',
             item: 'space',
-            amount: 10,
+            amount: 5,
             cost: 200,
         },
         {
-            text: 'You can buy a gun for $200.',
+            text: 'You can buy a gun for $300.',
             item: 'guns',
             amount: 1,
-            cost: 200,
+            cost: 300,
         },
         {
-            text: 'You can hire a prostitute to work with you for $200.',
+            text: 'You can hire a prostitute to work with you for $400.',
             item: 'bitches',
             amount: 1,
-            cost: 200,
+            cost: 400,
         },
     ]
 
