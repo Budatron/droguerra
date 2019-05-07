@@ -771,7 +771,12 @@
         $("#game_end").show();
     }
 
-
+    function overdose(){
+        $('#menu').hide();
+        $('body').addClass('overdose').append('<div class="overlay"></div>');
+        var bodyclon = $('body').clone().addClass('bodyclon');
+        $('html').append(bodyclon);
+    }
 
     /* adding buy buttons */
     $("#price_list li").each(function (i) {
@@ -895,6 +900,10 @@
     });
     
     $('.bottom-button').hide();
+
+    $("#overdose").on('click', function() {
+        overdose();
+    });
 
     /* first refresh */
     refresh_view();
