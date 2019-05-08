@@ -21,6 +21,14 @@
     var sanAntonio = {};
     var miami = {};
     var location_map = {};
+    var global_score = JSON.parse(localStorage.getItem("top_ten"));
+    if(global_score == null){
+        global_score = [];
+        for(var i=0; i<10; i++){
+            global_score.push({name: '', score: 0});
+        }
+    }
+    console.log(global_score)
 
     function getRandomPrice(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -105,7 +113,7 @@
 
 
     function Player_Object() {
-        this.days_left = 31;
+        this.days_left = 2;
         this.name = "Conrad";
         this.inventory = { 
             acid: 0,
@@ -121,7 +129,7 @@
             peyote: 0,
         };
         this.money = 200;
-        this.debt = 200;
+        this.debt = 20;
         this.daily_interest = 0.1;
         this.max_space = 30;
         this.space = 30;
@@ -134,6 +142,7 @@
         this.police = 0;
         this.police_limit = 0;
         this.fight_turn = 1; 
+        this.score = 0;
 
         this.advance_day = function () {
             if (this.days_left > 0) {
@@ -293,7 +302,7 @@
         }
 
         supply.price_list[bust] = new_price;
-        console.log('old', old_price, 'new', new_price);
+        // console.log('old', old_price, 'new', new_price);
         return new_price == old_price ? true : false;  
     }
 
@@ -372,9 +381,9 @@
     function msg_2(){
         // 1 in 7 chance to get bust by cops or get offered some stuff
         var rnd = Math.floor(Math.random() * 7);
-        console.log('msg_2' ,rnd)
+        // console.log('msg_2' ,rnd)
             if(!rnd){
-                console.log('chance to fight')
+                // console.log('chance to fight')
                 var drug = 0;
                 
                 
@@ -779,14 +788,20 @@
         /* calculate score and display end page */
 
         /* add score info to page */
-        var score = 0;
+        // var score = 0;
         var score_color = '';
-        $(".money_end").text('Money: ' +  player.money);
-        $(".debt_end").text('Debt: ' + player.debt);
-        score = player.money - player.debt;
-        $(".score_end").text('Score: ' + score);
+        $(".money_end").text('Money: $' +  player.money);
+        $(".bank_end").text('Bank: $' +  player.bank);
+        var drug_money = 0;
+        for( const item in player.inventory){
+            drug_money = drug_money + (parseInt(player.inventory[item]) * supply.price_list[item]);
+        }
+        $(".drug_money").text('Drugs: $' +  drug_money);
+        $(".debt_end").text('Debt: $' + player.debt);
+        player.score = (player.money + drug_money + player.bank )- player.debt;
+        $(".score_end").text('Score: $' + player.score);
         /* conditional coloring of score */
-        score_color = (score > 0) ? "green" : "red";
+        score_color = (player.score > 0) ? "green" : "red";
         $(".score_end").css("color", score_color);
 
         /* show game end */
@@ -823,6 +838,52 @@
         }, 12000)
     }
     
+    function save_score(){
+        if($("#save_score input").val() != ''){
+            console.log(global_score.join());
+            console.log(global_score);
+            for(var i = 0; i < 10; i++){
+                if(global_score[i].score < player.score ){
+                    global_score.splice(i, 0, {name: $("#save_score input").val(), score: player.score})
+                    global_score.pop();
+                    break;
+                }
+            }
+            localStorage.setItem("top_ten", JSON.stringify(global_score));
+            console.log(global_score.join());
+            console.log(global_score);
+            score_board()
+        }else {
+            alert("Fill with something");
+        }
+    }
+
+    function score_board(){
+        $('#score_board').show();
+        var score_list = $('#score_board .score_list');
+        for(var i = 0; i < 10; i++){
+            // if(global_score[i].score <= player.score ){
+                score_list.append('<li>'+ global_score[i].name + ': '+ global_score[i].score +'</li>')
+                // break;
+            // }
+        }
+    }
+
+    function deserv_to_save(){
+        var deserv = false;
+        for(var i = 0; i < 10; i++){
+            console.log(global_score[i])
+            if(global_score[i].score < player.score ){
+                $('#save_score').show();
+                
+                deserv = true;
+                break;
+            }
+        }  
+        if(!deserv)location.reload();
+    }
+
+
     /* adding buy buttons */
     $("#price_list li").each(function (i) {
         $(this).click(function (eventObject) {
@@ -961,6 +1022,19 @@
     $(".close-app").on('click', function() {
         navigator.app.exitApp();
     });
+
+    $(".close-end-game").on('click', function() {
+        deserv_to_save();
+    });
+
+    $(".save-score").on('click', function() {
+        save_score();
+    });
+
+    $(".close-score-board").on('click', function() {
+        location.reload();
+    });
+
 
     var msg_list = [
         {

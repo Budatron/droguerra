@@ -494,13 +494,19 @@
 				<p class="money_end"></p>
 			</div>
 			<div class="w3-container">
+				<p class="bank_end"></p>
+			</div>
+			<div class="w3-container">
+				<p class="drug_money"></p>
+			</div>
+			<div class="w3-container">
 				<p class="debt_end"></p>
 			</div>
 			<div class="w3-container">
 				<p class="score_end"></p>
 			</div>
 			<footer class="w3-container w3-padding">
-				<button class="w3-button w3-right" onclick="document.getElementById('game_end').style.display='none'">Close</button>
+				<button class="w3-button w3-right close-end-game" onclick="document.getElementById('game_end').style.display='none'">Close</button>
 			</footer>
 		</div>
 	</div>
@@ -521,17 +527,56 @@
 				<p class="">Don't forget to pay your debt with the shark that lent you money. It's not nice when you make him wait too long. Be very careful of pickpockets when you arrive in the city, they can leave you clean. To avoid that. You can leave your money in the bank. The bank also gives you an interest to keep your money with them. Large amounts of money in the bank raise the eyebrows of the authorities. Sometimes they can confiscate suspicious accounts.</p>
 				<p class="">If you are sick or injured it is advisable to go to San Antonio. There is the hospital where they can help you. It's not cheap but ... life is priceless. </p>
 			</div>
-			<!-- <div class="w3-container">
-				<p class="debt_end"></p>
-			</div>
-			<div class="w3-container">
-				<p class="score_end"></p>
-			</div> -->
+			
 			<footer class="w3-container w3-padding">
 				<button class="w3-button w3-right" onclick="document.getElementById('help').style.display='none'">Close</button>
 			</footer>
 		</div>
 	</div>
+
+	<!-- Save score modal -->
+	<div id="save_score" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-opacity  w3-theme-d3">
+			<header class="w3-container">
+				<!-- <span onclick="document.getElementById('hospital').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
+				<h2>Save your score</h2>
+			</header>
+			<div class="w3-cell-row w3-padding">
+				<div class="w3-container">
+					<p class="score-save-text">You deserve to put your name here. </p>
+				</div>
+				<div class="w3-container">
+					<p class="score_end">$0</p>
+				</div>
+				<div class="w3-container">
+					<p><input class="w3-block" type="text" name="quantity" min="1" max="8"></p>
+				</div>
+			</div>
+	
+			<footer class="w3-container w3-padding">
+				<button class="w3-button save-score" onclick="document.getElementById('save_score').style.display='none'">Save</button>
+				<button class="w3-button w3-right" onclick="document.getElementById('save_score').style.display='none'">Close</button>
+			</footer>
+		</div>
+	</div>
+
+		<!-- Score board modal -->
+		<div id="score_board" class="w3-modal">
+			<div class="w3-modal-content w3-card-4 w3-animate-opacity  w3-theme-d3">
+				<header class="w3-container">
+					<!-- <span onclick="document.getElementById('hospital').style.display='none'" class="w3-button w3-display-topright w3-xlarge">&times;</span> -->
+					<h2>Score Board</h2>
+				</header>
+				<ul class="w3-ul w3-padding score_list">
+					
+				</ul>
+		
+				<footer class="w3-container w3-padding">
+					
+					<button class="w3-button w3-right close-score-board" onclick="document.getElementById('score_board').style.display='none'">Close</button>
+				</footer>
+			</div>
+		</div>
 
 	<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="js/TweenLite.min.js"></script>
