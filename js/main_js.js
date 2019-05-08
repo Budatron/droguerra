@@ -129,7 +129,7 @@
             peyote: 0,
         };
         this.money = 200;
-        this.debt = 20;
+        this.debt = 200;
         this.daily_interest = 0.1;
         this.max_space = 30;
         this.space = 30;
