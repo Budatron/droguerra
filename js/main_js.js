@@ -959,17 +959,7 @@
     });
 
     $(".close-app").on('click', function() {
-        if (typeof cordova !== 'undefined') {
-            if (navigator.app) {
-                navigator.app.exitApp();
-            }
-            else if (navigator.device) {
-                navigator.device.exitApp();
-            }
-        } else {
-            window.close();
-           
-        }
+        navigator.app.exitApp();
     });
 
     var msg_list = [
