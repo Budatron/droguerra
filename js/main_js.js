@@ -28,7 +28,7 @@
             global_score.push({name: '', score: 0});
         }
     }
-    console.log(global_score)
+    var score_reload = false;
 
     function getRandomPrice(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -840,8 +840,8 @@
     
     function save_score(){
         if($("#save_score input").val() != ''){
-            console.log(global_score.join());
-            console.log(global_score);
+            // console.log(global_score.join());
+            // console.log(global_score);
             for(var i = 0; i < 10; i++){
                 if(global_score[i].score < player.score ){
                     global_score.splice(i, 0, {name: $("#save_score input").val(), score: player.score})
@@ -850,8 +850,9 @@
                 }
             }
             localStorage.setItem("top_ten", JSON.stringify(global_score));
-            console.log(global_score.join());
-            console.log(global_score);
+            // console.log(global_score.join());
+            // console.log(global_score);
+            score_reload = true;
             score_board()
         }else {
             alert("Fill with something");
@@ -861,6 +862,7 @@
     function score_board(){
         $('#score_board').show();
         var score_list = $('#score_board .score_list');
+        score_list.empty()
         for(var i = 0; i < 10; i++){
             // if(global_score[i].score <= player.score ){
                 score_list.append('<li>'+ global_score[i].name + ': '+ global_score[i].score +'</li>')
@@ -1031,8 +1033,14 @@
         save_score();
     });
 
+    $(".score-board").on('click', function() {
+        score_board();
+        score_reload = false;
+
+    });
+
     $(".close-score-board").on('click', function() {
-        location.reload();
+        if(score_reload)location.reload();
     });
 
 
