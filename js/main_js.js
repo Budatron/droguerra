@@ -773,9 +773,24 @@
 
     function overdose(){
         $('#menu').hide();
-        $('body').addClass('overdose').append('<div class="overlay"></div>');
-        var bodyclon = $('body').clone().addClass('bodyclon');
-        $('html').append(bodyclon);
+        var w = window.outerWidth;
+        var h = window.outerHeight;
+       $('#main-screen *').each(function(){
+            $(this).off();
+            $(this).css('overflow', 'visible');
+            var rw = Math.floor(Math.random() * (w*2));
+            var rh = Math.floor(Math.random() * (h*2));
+            var rot = Math.floor(Math.random() * 360);
+            var tween = TweenLite.to($(this),20, 
+            {
+                x: rw-w,
+                y: rh-h,
+                autoAlpha: 0,
+                rotation: rot-180,
+                ease: Power1.easeInOut,
+               }
+               );
+        })
     }
 
     /* adding buy buttons */

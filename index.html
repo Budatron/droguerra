@@ -9,124 +9,123 @@
 <link rel="stylesheet" href="css/main_css.css">
 <body class="w3-theme-l4">
 	
-	<header class="w3-bar w3-card w3-theme w3-top">
-		<div class="w3-container w3-padding-small w3-theme-d3">
-			<div class='location w3-left'>Manhattan</div>
-			<div class="w3-right">
-				<span id="days_left">0</span>/30
-				<!-- <i class="fa fa-calendar"></i> -->
-				<i class="material-icons calendar">today</i>
+	<div id="main-screen">
+		<header class="w3-bar w3-card w3-theme w3-top">
+			<div class="w3-container w3-padding-small w3-theme-d3">
+				<div class='location w3-left'>Manhattan</div>
+				<div class="w3-right">
+					<span id="days_left">0</span>/30
+					<!-- <i class="fa fa-calendar"></i> -->
+					<i class="material-icons calendar">today</i>
+				</div>
 			</div>
-		</div>
-		<!-- <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
-		<h1 class="w3-bar-item">Movies</h1> -->
-		<!-- <table class="w3-table w3-theme-l2">
-			<tr>
-				<td class="w3-padding-small">Cash: $<span id="cash">1000,000,000</span></td>
-				<td class="w3-padding-small">Bitches: <span id="bitches">0</span></td>
-			</tr>
-			<tr>
-				<td class="w3-padding-small">Bank: $<span id="bank">0</span></td>
-				<td class="w3-padding-small">Guns: <span id="guns">0</span></td>
-			</tr>
-			<tr>
-				<td class="w3-padding-small" style="color: red;"">Debt: $<span id="debt">0</span></td>
-				<td class="w3-padding-small">Space: <span id="space">0</span></td>
-			</tr>
-		</table> -->
-
-		<div class="w3-theme-l2 header-container">
-			<div class="w3-padding-small">Cash: $<span id="cash">1000,000,000</span></div>
-			<div class="w3-padding-small">Bitches: <span id="bitches">0</span></div>
-			<div class="w3-padding-small">Bank: $<span id="bank">0</span></div>
-			<div class="w3-padding-small">Guns: <span id="guns">0</span></div>
-			<div class="w3-padding-small debt-row">Debt: $<span id="debt">0</span></div>
-			<div class="w3-padding-small">Space: <span id="space">0</span></div>
-		</div>
-
-		<div class="w3-padding-small  w3-theme-l4 health-bar">
-			<div class="health-text">Health:</div>
-			<div class="w3-theme-d4 progress-bar-1">
-				<div class="w3-container w3-center progress-bar-2" style="width:25%; background: green">25%</div>
+			<!-- <button class="w3-bar-item w3-button w3-xxxlarge w3-hover-theme" onclick="openSidebar()">&#9776;</button>
+			<h1 class="w3-bar-item">Movies</h1> -->
+			<!-- <table class="w3-table w3-theme-l2">
+				<tr>
+					<td class="w3-padding-small">Cash: $<span id="cash">1000,000,000</span></td>
+					<td class="w3-padding-small">Bitches: <span id="bitches">0</span></td>
+				</tr>
+				<tr>
+					<td class="w3-padding-small">Bank: $<span id="bank">0</span></td>
+					<td class="w3-padding-small">Guns: <span id="guns">0</span></td>
+				</tr>
+				<tr>
+					<td class="w3-padding-small" style="color: red;"">Debt: $<span id="debt">0</span></td>
+					<td class="w3-padding-small">Space: <span id="space">0</span></td>
+				</tr>
+			</table> -->
+	
+			<div class="w3-theme-l2 header-container">
+				<div class="w3-padding-small">Cash: $<span id="cash">1000,000,000</span></div>
+				<div class="w3-padding-small">Bitches: <span id="bitches">0</span></div>
+				<div class="w3-padding-small">Bank: $<span id="bank">0</span></div>
+				<div class="w3-padding-small">Guns: <span id="guns">0</span></div>
+				<div class="w3-padding-small debt-row">Debt: $<span id="debt">0</span></div>
+				<div class="w3-padding-small">Space: <span id="space">0</span></div>
 			</div>
-		</div>
-		
-	</header>
-
-	<div class="w3-theme-l3 board">
-
-	<ul class="w3-ul" id="price_list">
-		<li class="w3-bar w3-button drug" id="acid">
-			<div class="w3-bar-item w3-padding-small">Acid: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+	
+			<div class="w3-padding-small  w3-theme-l4 health-bar">
+				<div class="health-text">Health:</div>
+				<div class="w3-theme-d4 progress-bar-1">
+					<div class="w3-container w3-center progress-bar-2" style="width:25%; background: green">25%</div>
+				</div>
+			</div>
+			
+		</header>
+	
+		<div class="w3-theme-l3 board">
+	
+		<ul class="w3-ul" id="price_list">
+			<li class="w3-bar w3-button drug" id="acid">
+				<div class="w3-bar-item w3-padding-small">Acid: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+					<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="cocain">
+				<div class="w3-bar-item w3-padding-small">Cocaine: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty" style="width: 50px; text-align: center">10</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="ecstasy">
+				<div class="w3-bar-item w3-padding-small">Ecstasy: </div><span class="w3-bar-item w3-padding-small price">$0</span>
 				<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="cocain">
-			<div class="w3-bar-item w3-padding-small">Cocaine: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">10</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="ecstasy">
-			<div class="w3-bar-item w3-padding-small">Ecstasy: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="pcp">
-			<div class="w3-bar-item w3-padding-small">PCP: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="heroin">
-			<div class="w3-bar-item w3-padding-small">Heroin: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="weed">
-			<div class="w3-bar-item w3-padding-small">Weed: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="speed">
-			<div class="w3-bar-item w3-padding-small">Speed: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="shrooms">
-			<div class="w3-bar-item w3-padding-small">Shrooms: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty" style="width: 50px; text-align: center">10</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="hashish">
-			<div class="w3-bar-item w3-padding-small">Hashish: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty"
-			 style="width: 50px; text-align: center">1000</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="ludes">
-			<div class="w3-bar-item w3-padding-small">Ludes: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty"
-			 style="width: 50px; text-align: center">1000</span>
-		</li>
-		<li class="w3-bar w3-button drug" id="peyote">
-			<div class="w3-bar-item w3-padding-small">Peyote: </div><span class="w3-bar-item w3-padding-small price">$0</span>
-			<span class="w3-right qty"
-			 style="width: 50px; text-align: center">1000</span>
-		</li>
-	</ul>
-
-	</div>
-
-	<footer class="w3-container w3-theme-d2 w3-bottom">
-		<div class="w3-bar">
-			
-			<button class="w3-button" onclick="document.getElementById('menu').style.display='block'"><div><i class="material-icons">home</i><span>Menu</span></div></button>
-			<button class="w3-button" onclick="document.getElementById('inventory').style.display='block'"><div><i class="material-icons">format_list_bulleted</i><span>Stock</span></div></button>
-
-			<button class="w3-button bottom-button button-bank" onclick="document.getElementById('bank_modal').style.display='block'"><div><i class="material-icons">account_balance</i><span>Bank</span></div></button>
-			<button class="w3-button bottom-button button-hospital" onclick="document.getElementById('hospital').style.display='block'"><div><i class="material-icons">local_hospital</i><span>Health</span></div></button>
-			<button class="w3-button bottom-button button-shark" onclick="document.getElementById('shark').style.display='block'"><div><i class="material-icons">local_atm</i><span>Shark</span></div></button>
-			<button class="w3-button bottom-button button-gun" style="opacity: 0;"><div><i class="material-icons">local_mall</i><span>Stuff</span></div></button>
-			<!-- <button class="w3-button" onclick="document.getElementById('fight').style.display='block'"><div><i class="material-icons">warning</i><span>Fight</span></div></button> -->
-			
-			<!-- <button class="w3-button" onclick="document.getElementById('msg').style.display='block'"><div><i class="material-icons">sms</i><span>Msg</span></div></button> -->
-			
-			<button class="w3-button w3-right" onclick="document.getElementById('jet_modal').style.display='block'"><div><i class="material-icons">flight</i><span>Jet</span></div></button>
+			</li>
+			<li class="w3-bar w3-button drug" id="pcp">
+				<div class="w3-bar-item w3-padding-small">PCP: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="heroin">
+				<div class="w3-bar-item w3-padding-small">Heroin: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="weed">
+				<div class="w3-bar-item w3-padding-small">Weed: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="speed">
+				<div class="w3-bar-item w3-padding-small">Speed: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty" style="width: 50px; text-align: center">100</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="shrooms">
+				<div class="w3-bar-item w3-padding-small">Shrooms: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty" style="width: 50px; text-align: center">10</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="hashish">
+				<div class="w3-bar-item w3-padding-small">Hashish: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty"
+				 style="width: 50px; text-align: center">1000</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="ludes">
+				<div class="w3-bar-item w3-padding-small">Ludes: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty"
+				 style="width: 50px; text-align: center">1000</span>
+			</li>
+			<li class="w3-bar w3-button drug" id="peyote">
+				<div class="w3-bar-item w3-padding-small">Peyote: </div><span class="w3-bar-item w3-padding-small price">$0</span>
+				<span class="w3-right qty"
+				 style="width: 50px; text-align: center">1000</span>
+			</li>
+		</ul>
+	
 		</div>
-	</footer>
-
-
-
+	
+		<footer class="w3-container w3-theme-d2 w3-bottom">
+			<div class="w3-bar">
+				
+				<button class="w3-button" onclick="document.getElementById('menu').style.display='block'"><div><i class="material-icons">home</i><span>Menu</span></div></button>
+				<button class="w3-button" onclick="document.getElementById('inventory').style.display='block'"><div><i class="material-icons">format_list_bulleted</i><span>Stock</span></div></button>
+	
+				<button class="w3-button bottom-button button-bank" onclick="document.getElementById('bank_modal').style.display='block'"><div><i class="material-icons">account_balance</i><span>Bank</span></div></button>
+				<button class="w3-button bottom-button button-hospital" onclick="document.getElementById('hospital').style.display='block'"><div><i class="material-icons">local_hospital</i><span>Health</span></div></button>
+				<button class="w3-button bottom-button button-shark" onclick="document.getElementById('shark').style.display='block'"><div><i class="material-icons">local_atm</i><span>Shark</span></div></button>
+				<button class="w3-button bottom-button button-gun" style="opacity: 0;"><div><i class="material-icons">local_mall</i><span>Stuff</span></div></button>
+				<!-- <button class="w3-button" onclick="document.getElementById('fight').style.display='block'"><div><i class="material-icons">warning</i><span>Fight</span></div></button> -->
+				
+				<!-- <button class="w3-button" onclick="document.getElementById('msg').style.display='block'"><div><i class="material-icons">sms</i><span>Msg</span></div></button> -->
+				
+				<button class="w3-button w3-right" onclick="document.getElementById('jet_modal').style.display='block'"><div><i class="material-icons">flight</i><span>Jet</span></div></button>
+			</div>
+		</footer>
+	</div>
 
 <!-- Travel modal -->
 	<div id="jet_modal" class="w3-modal">
@@ -507,6 +506,8 @@
 	</div>
 
 	<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenLite.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js"></script>
 	<script type="text/javascript" src="js/main_js.js"></script>
 </body>
 </html> 
