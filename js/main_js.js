@@ -113,7 +113,7 @@
 
 
     function Player_Object() {
-        this.days_left = 5;
+        this.days_left = 31;
         this.name = "Conrad";
         this.inventory = { 
             acid: 0,
