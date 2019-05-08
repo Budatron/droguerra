@@ -6,6 +6,21 @@
 
 	myPrefix.init = function() {
 
+    
+     /* Game Data */
+
+    var player = {};
+
+    var supply = {};
+
+    var losAngeles = {};
+    var harlem = {};
+    var bronx = {};
+    var chicago = {};
+    var brooklyn =  {};
+    var sanAntonio = {};
+    var miami = {};
+    var location_map = {};
 
     function getRandomPrice(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -144,32 +159,36 @@
         this.current_knok = 3;
     }
 
-    /* Game Data */
+    function init_game(){
+        /* Game Data */
 
-    var player = new Player_Object();
+        player = new Player_Object();
 
-    var supply = new Supply_Object();
-    // var item_prices = { apples: 10, oranges: 100 };
+        supply = new Supply_Object();
 
-    var losAngeles = new Place_Object("Los Angeles");
-    // apple_orchard.price_differences = { apples: .5, oranges: 2 };
-    var harlem = new Place_Object("Harlem");
-    // orange_grove.price_differences = { apples: 2, oranges: .5 };
-    var bronx = new Place_Object("Bronx");
-    var chicago = new Place_Object("Chicago");
-    var brooklyn = new Place_Object("Brooklyn");
-    var sanAntonio = new Place_Object("San Antonio");
-    var miami = new Place_Object("Miami");
-    // var location_map = { "apple_orchard": apple_orchard, "orange_grove": orange_grove };
-    var location_map = {
-    losAngeles: losAngeles,
-    harlem: harlem,
-    bronx: bronx,
-    chicago: chicago,
-    brooklyn: brooklyn,
-    sanAntonio: sanAntonio,
-    miami: miami
-    };
+        losAngeles = new Place_Object("Los Angeles");
+        harlem = new Place_Object("Harlem");
+        bronx = new Place_Object("Bronx");
+        chicago = new Place_Object("Chicago");
+        brooklyn = new Place_Object("Brooklyn");
+        sanAntonio = new Place_Object("San Antonio");
+        miami = new Place_Object("Miami");
+        location_map = {
+            losAngeles: losAngeles,
+            harlem: harlem,
+            bronx: bronx,
+            chicago: chicago,
+            brooklyn: brooklyn,
+            sanAntonio: sanAntonio,
+            miami: miami
+        };
+
+        // $('#menu').hide();
+        /* first refresh */
+        refresh_view();
+
+
+    }
 
     function healthColor(health){
         var color = 'red';
@@ -381,6 +400,10 @@
         $('#msg .message-text').text(item.text);
         if(item.item == "health"){player.health = player.health - item.amount;}
         else if(item.item == 'money'){player.money = player.money + item.amount;}
+        else if(item.item == 'pickpocket'){
+            var random_pic = Math.floor(Math.random() * player.money);
+            player.money = player.money - random_pic;
+        }
         else if(item.item == 'dea'){
             if(player.bank > 1000000) {
                 player.bank = 0;
@@ -781,18 +804,25 @@
             var rw = Math.floor(Math.random() * (w*2));
             var rh = Math.floor(Math.random() * (h*2));
             var rot = Math.floor(Math.random() * 360);
-            var tween = TweenLite.to($(this),20, 
-            {
-                x: rw-w,
-                y: rh-h,
-                autoAlpha: 0,
-                rotation: rot-180,
-                ease: Power1.easeInOut,
-               }
-               );
+            var tween = TweenLite.to($(this), 20 , {
+                    x: rw-w,
+                    y: rh-h,
+                    autoAlpha: 0,
+                    rotation: rot-180,
+                    ease: Power1.easeInOut,
+                    
+                }
+            );
         })
+        
+        setTimeout(function(){
+            $('#main-screen').addClass('over-text').text('GAME OVER')
+        }, 10000)
+        setTimeout(function(){
+            location.reload();
+        }, 12000)
     }
-
+    
     /* adding buy buttons */
     $("#price_list li").each(function (i) {
         $(this).click(function (eventObject) {
@@ -920,16 +950,34 @@
         overdose();
     });
 
-    /* first refresh */
-    refresh_view();
+    $(".new-game").on('click', function() {
+        location.reload();
+    });
+    
+    $(".help").on('click', function() {
+        $('#help').show();
+    });
 
-    // });
+    $(".close-app").on('click', function() {
+        if (navigator.app) {
+            navigator.app.exitApp();
+        } else if (navigator.device) {
+            navigator.device.exitApp();
+        } else {
+            window.close();
+        }
+    });
 
     var msg_list = [
         {
             text: 'You find a dead body with $100.',
             item: 'money',
             amount: 100,
+        },
+        {
+            text: "You've been robbed by a pickpocket.",
+            item: 'pickpocket',
+            amount: 0,
         },
         {
             text: 'Stranger said: Police is following you.',
@@ -1018,6 +1066,8 @@
             cost: 400,
         },
     ]
+
+    init_game();
 
 }
 
