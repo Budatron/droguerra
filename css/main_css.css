@@ -119,7 +119,7 @@ footer button span{
   /* border: #ddd solid; */
 }
 
-#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button, #deal_modal footer button, #sell_modal footer button, #buy_modal footer button, #game_end footer button {
+#bank_modal footer button, #jet_modal footer button, #hospital footer button, #stuff footer button, #fight footer button, #inventory footer button, #msg footer button, #shark footer button, #deal_modal footer button, #sell_modal footer button, #buy_modal footer button, #game_end footer button, #menu footer button, #save_score footer button, #help footer button, #score_board footer button {
   text-transform: uppercase;
 }
 
@@ -171,4 +171,9 @@ footer button span{
   margin: 200px auto;
   position: absolute;
   text-align: center;
+}
+
+.w3-button:hover{
+  color: lightskyblue !important;
+  background-color: inherit !important;
 }
