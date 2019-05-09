@@ -828,10 +828,10 @@
             var rw = Math.floor(Math.random() * (w*2));
             var rh = Math.floor(Math.random() * (h*2));
             var rot = Math.floor(Math.random() * 360);
-            var tween = TweenLite.to($(this), 20 , {
+            var tween = TweenLite.to($(this), 8 , {
                     x: rw-w,
                     y: rh-h,
-                    autoAlpha: 0,
+                    // autoAlpha: 0,
                     rotation: rot-180,
                     ease: Power1.easeInOut,
                     
@@ -840,11 +840,11 @@
         })
         
         setTimeout(function(){
-            $('#main-screen').addClass('over-text').text('GAME OVER')
-        }, 10000)
+            $('#main-screen').fadeIn( "slow").addClass('over-text').text('GAME OVER');
+        }, 6000)
         setTimeout(function(){
             location.reload();
-        }, 12000)
+        }, 8000)
     }
     
     function save_score(){
