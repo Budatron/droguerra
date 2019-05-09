@@ -535,11 +535,11 @@
     }
 
     function run(){
-        var random_run = Math.floor(Math.random() * 10);
+        var random_run = Math.floor(Math.random() * 7);
         // console.log('run', random_run)
         if(!random_run) {
             surrender();
-        } else if(random_run == 1 || random_run == 2  || random_run == 3 ){
+        } else if(random_run == 1 ){
             no_scape();
         } else {
             $('.fight-text').text('You scape from the cops');
@@ -631,20 +631,29 @@
             player.space = player.space - 10;
             // remove_inventory_items();
 
-            var virtual_space = 10;
+            var virtual_space = 0;
             for( var item in player.inventory){
-                if( player.inventory[item]){
-                    if(virtual_space >= player.inventory[item]){ 
-                        virtual_space = virtual_space - player.inventory[item];
-                        player.space = player.space + player.inventory[item];
-                        player.inventory[item] = 0;
-                    } else {
-                        player.inventory[item] = player.inventory[item] - virtual_space;
-                        player.space = player.space + virtual_space;
-                        virtual_space = 0;
-                    }
-                } 
+                virtual_space = virtual_space + player.inventory[item];
             }
+            if(virtual_space > player.space){
+                virtual_space = virtual_space - player.space;
+                if(virtual_space >= 10) virtual_space = 10;
+
+                for( var item in player.inventory){
+                    if( player.inventory[item]){
+                        if(virtual_space >= player.inventory[item]){ 
+                            virtual_space = virtual_space - player.inventory[item];
+                            player.space = player.space + player.inventory[item];
+                            player.inventory[item] = 0;
+                        } else {
+                            player.inventory[item] = player.inventory[item] - virtual_space;
+                            player.space = player.space + virtual_space;
+                            virtual_space = 0;
+                        }
+                    } 
+                }
+            }
+            
         }
         refresh_view();
     }
