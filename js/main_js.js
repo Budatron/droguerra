@@ -870,6 +870,7 @@
 
     function score_board(){
         $('#score_board').show();
+        $("#save_score").hide();
         var score_list = $('#score_board .score_list');
         score_list.empty()
         for(var i = 0; i < 10; i++){
